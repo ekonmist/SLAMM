@@ -1,0 +1,272 @@
+entities:
+    person:
+        fields:
+            - hhnum: int
+            - hhseqnum: int
+            - sex: int
+            - qual4: int
+            - qual3: int
+            - isco: int
+            - ageg: int
+            - ilostat: int
+            - hatfield1: int
+            - status: int
+            - status1y: {type: int, initialdata: False}
+#            - status1y: int
+            - nace10: int
+            - nace10_1y: int
+            - coeff: float
+            - hatlev3: int
+            - hatlev5: int
+            - country_b: int 
+            - pocet_deti: int            
+            - age: {type: int, initialdata: False}           
+            - to_give_birth: {type: bool, initialdata: False}
+            - dead: {type: bool, initialdata: False}
+            - age_float: {type: float, initialdata: False}
+            - days: {type: float, initialdata: False}
+            - nace_origin: {type: int, initialdata: False}
+            - nace: {type: int, initialdata: False}
+            - nace1y: {type: int, initialdata: False}
+            - qual: {type: int, initialdata: False}     
+            - qual1y: {type: int, initialdata: False}     
+            - to_immigrate: {type: bool, initialdata: False}
+            - immigrant_sim: {type: bool, initialdata: False}
+            - immigrant_score: {type: float, initialdata: False}
+            - immigrant: {type: bool, initialdata: False}
+            - time_to_leave: {type: int, initialdata: False}
+            - leave: {type: bool, initialdata: False}
+
+        links:
+             mother: {type: many2one, target: person, field: hhmoth}
+             father: {type: many2one, target: person, field: hhfath}
+             partner: {type: many2one, target: person, field: hhspou}
+#             household: {type: many2one, target: household, field: hhnum}
+             children: {type: one2many, target: person, field: hhmoth}
+            
+        macros:
+            UNSET: -1
+
+            ISMALE: sex == 1
+            ISFEMALE: sex == 2            
+            
+        processes:             
+            age1():
+#                Based on detailed age structure in 2016 from administrative data (EUROSTAT:demo_pjan)
+#                "c:\CloudStation\Microsim\SK_microsim\vstupy\demo_pjan.xls"
+               - age: 
+                    if(ageg==1, 
+                       choice([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], 
+                       [0.069400016, 0.071794323, 0.068629172, 0.065442375, 0.064946919, 0.065581873, 0.064954134, 0.062160576, 0.061240614, 0.061977786, 0.066181953, 0.067288313, 0.068269605, 0.070439032, 0.071693307]),              
+                    if(ageg==2,
+                      choice([15, 16, 17, 18, 19],
+                      [0.174628046, 0.188191417, 0.206936655, 0.210144886, 0.220098997]),
+                    if(ageg==3,
+                      choice([20, 21, 22, 23, 24],
+                      [0.194066639, 0.194128631, 0.200543544, 0.202599193, 0.208661993]),               
+                    if(ageg==4,
+                      choice([25, 26, 27, 28, 29],
+                      [0.198809245, 0.199103061, 0.199941237, 0.201045897, 0.201100561]),
+                    if(ageg==5,
+                      choice([30, 31, 32, 33, 34],
+                      [0.194132021, 0.203492453, 0.201737778, 0.200845277, 0.199792472]),               
+                    if(ageg==6,
+                      choice([35, 36, 37, 38, 39],
+                      [0.213836672, 0.213753704, 0.202145312, 0.190631741, 0.179632571]),
+                    if(ageg==7,
+                      choice([40, 41, 42, 43, 44],
+                      [0.206248054, 0.202986029, 0.193278489, 0.195020293, 0.202467134]),               
+                    if(ageg==8,
+                      choice([45, 46, 47, 48, 49],
+                      [0.198139787, 0.204857518, 0.202090611, 0.194399142, 0.200512942]),
+                    if(ageg==9,
+                      choice([50, 51, 52, 53, 54],
+                      [0.194550561, 0.191974518, 0.199782663, 0.205136081, 0.208556177]),               
+                    
+                    if(ageg==10,
+                    if(sex==1,
+                      choice([55, 56, 57, 58, 59],
+                      [0.20796497, 0.202211481, 0.198861776, 0.198032795, 0.192928978]),           
+                    if(status==1 or status==2,  
+                      choice([55, 56, 57, 58, 59],
+                      [0.30, 0.26, 0.19, 0.15, 0.10]),
+                    if(status!=4,
+                      choice([55, 56, 57, 58, 59],
+                      [0.21, 0.21, 0.20, 0.19, 0.19]),
+                      choice([55, 56, 57, 58, 59],
+                      [0.04,0.09,0.22,0.30,0.35])))),
+                      
+                    if(ageg==11,
+                    if(sex==2,
+                    if(status==1,
+                      choice([60, 61, 62, 63, 64],
+                      [0.35,0.30,0.15,0.12,0.08]),
+                      choice([60, 61, 62, 63, 64],
+                      [0.205, 0.205, 0.205, 0.205, 0.180])),
+                    if(status==1,
+                       choice([60, 61, 62, 63, 64],
+                       [0.42,0.31,0.16,0.07,0.04]),
+                    if(status!=4,
+                       choice([60, 61, 62, 63, 64],
+                       [0.50,0.50,0.0,0.00,0.00]),
+                       choice([60, 61, 62, 63, 64],
+                      [0.12,0.14,0.23,0.26,0.25])))),
+                      
+                    if(ageg==12,
+                      choice([65, 66, 67, 68, 69],
+                      [0.20839902, 0.214291295, 0.197078682, 0.192367619, 0.187863384]),
+                    if(ageg==13,
+                      choice([70, 71, 72, 73, 74],
+                      [0.23022481, 0.211588842, 0.196599548, 0.185210253, 0.176376547]),
+                      choice([75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
+                      [0.10279599, 0.097655845, 0.093417298, 0.092881866, 0.085990342, 0.079167904, 0.071316057, 0.063871828, 0.05667977, 0.049656978, 0.042247293, 0.037072605, 0.033518029, 0.026830313, 0.021759256, 0.014408296, 0.011240613, 0.004214366, 0.003368039, 0.002625343, 0.002580436, 0.002393898, 0.001564843, 0.001181404, 0.000749604, 0.000811784])
+                           )))))))))))))
+                           
+#                   podiely pre rocnik 62- treba aktualizovat podla administrativnych dat  
+               - days: uniform()
+               - pocet_deti: 
+#                    if(sex==2, 
+#                    if(age==15, choice([0,1,2,3,4,5], [0.986894199, 0.009279884, 0.0028142, 0.000627962, 0, 0.000302355]), choice([0,1,2,3,4,5], [1, 0, 0, 0, 0, 0])),0)
+
+                    if(sex==2, 
+                    if(age==15, choice([0,1,2,3,4,5], [0.986894199, 0.009279884, 0.0028142, 0.000627962, 0.000081403, 0.000302352]),
+                    if(age==16, choice([0,1,2,3,4,5], [0.972964604, 0.019143075, 0.005805294, 0.001295396, 0.000167922, 0.000623709]),
+                    if(age==17, choice([0,1,2,3,4,5], [0.945854318, 0.038339179, 0.011626668, 0.002594381, 0.000336309, 0.001249146]),
+                    if(age==18, choice([0,1,2,3,4,5], [0.924360803, 0.053558189, 0.016241957, 0.003624238, 0.000469809, 0.001745004]),
+                    if(age==19, choice([0,1,2,3,4,5], [0.893805564, 0.075193576, 0.022803064, 0.005088287, 0.000659593, 0.002449916]),
+                    if(ageg==3, choice([0,1,2,3,4,5], [0.775409174, 0.1548844, 0.050839918, 0.011924579, 0.003682094, 0.003259835]),
+                    if(ageg==4, choice([0,1,2,3,4,5], [0.498227223, 0.283783981, 0.165865209, 0.03199456, 0.008535919, 0.011593109]),
+                    if(ageg==5, choice([0,1,2,3,4,5], [0.239286796, 0.297193172, 0.357427035, 0.072616912, 0.015226243, 0.018249843]),
+                    if(ageg==6, choice([0,1,2,3,4,5], [0.117041429, 0.226295889, 0.469170645, 0.129395516, 0.030401638, 0.027694884]),
+                    if(ageg==7, choice([0,1,2,3,4,5], [0.093422362, 0.162032979, 0.488969354, 0.169296383, 0.047507487, 0.038771434]),
+                    if(ageg==8, choice([0,1,2,3,4,5], [0.066209477, 0.120922745, 0.506486311, 0.206457379, 0.059627201, 0.040296887]),
+                    if(ageg==9, choice([0,1,2,3,4,5], [0.045520645, 0.099103898, 0.504747978, 0.238972207, 0.068686104, 0.04296917]),
+                    if(ageg==10, choice([0,1,2,3,4,5], [0.037372373, 0.090605337, 0.498056975, 0.256282522, 0.074567151, 0.043115643]),
+                    if(ageg>=11, choice([0,1,2,3,4,5], [0.024919804, 0.092351637, 0.459815267, 0.272170629, 0.091654525, 0.059088137]),
+                    choice([0,1,2,3,4,5], [1, 0, 0, 0, 0, 0]))))))))))))))),0)
+                    
+               - status1y: status 
+
+            time_to_leave1():
+               - time_to_leave: if(country_b>1, choice([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [0.1, 0.16, 0.18, 0.16, 0.1, 0.08, 0.07, 0.06, 0.05, 0.04]), 0)
+               
+            ageing():           
+               - age: age + 1
+               - ageg: 5 * trunc(age / 5)+2 
+               - ageg: if(age<15, 15,
+                          if(age>74, 14, ageg))
+               - age_float: age+days
+               - time_to_leave: if(country_b!=1, time_to_leave + 1, 0)
+                               
+            birth():
+#                FOR STARTING WITH "False" FOR ALL FOR SURE IN SUCCESIVE PERIODS (not sure that necessary but)
+#                50 is missing in alignment table
+               - to_give_birth: False
+               - to_give_birth: logit_regr (0.0, filter=(ISFEMALE and (age >= 15) and (age < 50)), align='fertility_EUROPOP.csv')
+               - pocet_deti: if(to_give_birth, pocet_deti+1, pocet_deti)
+               - new('person', filter=to_give_birth,
+                      hhnum = hhnum,
+                      hatlev3 = -2,
+                      hatlev5 = -2,
+                      hatfield1= -2,
+                      ilostat= 3,
+                      age = 0,
+                      ageg = 2,
+                      status = 3,
+                      country_b = 1,
+                      days = uniform(),
+                      age_float = age+days,
+                      pocet_deti = 0,
+                      sex = choice([1, 2], [0.5131, 0.4869]))                           
+#                      hhmoth = hhseqnum,
+               
+               
+               
+            death():
+                # ALIGNEMENT TABLES CHANGE FOR ADDING 101-102-103 (not necessary) AND DEATH FOR SURE AT 103
+               - dead: if(ISMALE,
+                           logit_regr(0.0, align='mortality_male_EUROPOP.csv'),
+                           logit_regr(0.0, align='mortality_female_EUROPOP.csv'))           
+               - csv(period, groupby(period, sex, status, immigrant, immigrant_new, nace, dead, period), fname='replacement_dead.csv', mode='a')                                
+               - remove(dead)
+               
+               
+               - tab_leave: load('leave.csv', fields=[('PERIOD', int), ('L_1', float), ('L_2', float), ('L_3', float), ('L_4', float), ('L_5', float), ('L_6', float), ('L_7', float), ('L_8', float), ('L_9', float), ('L_10', float), ('L_11', float)])
+
+# zakladny scenar
+               - leave: if(time_to_leave==1, choice([True, False], [0.20, .80]),
+                        if(time_to_leave==2, choice([True, False], [0.25, .75]),
+                        if(time_to_leave==3, choice([True, False], [0.20, .80]),
+                        if(time_to_leave==4, choice([True, False], [0.18, .82]),
+                        if(time_to_leave==5, choice([True, False], [0.16, .84]),
+                        if(time_to_leave==6, choice([True, False], [0.14, .86]),
+                        if(time_to_leave==7, choice([True, False], [0.12, .88]),
+                        if(time_to_leave==8, choice([True, False], [0.10, .90]),
+                        if(time_to_leave==9, choice([True, False], [0.08, .92]),
+                        if(time_to_leave>=10, choice([True, False], [0.05, .95]),False))))))))))
+
+# vyssi odchod                        
+#               - leave: if(time_to_leave==1, choice([True, False], [0.30, .70]),
+#                        if(time_to_leave==2, choice([True, False], [0.35, .65]),
+#                        if(time_to_leave==3, choice([True, False], [0.30, .70]),
+#                        if(time_to_leave==4, choice([True, False], [0.28, .72]),
+#                        if(time_to_leave==5, choice([True, False], [0.26, .74]),
+#                        if(time_to_leave==6, choice([True, False], [0.24, .76]),
+#                        if(time_to_leave==7, choice([True, False], [0.22, .78]),
+#                        if(time_to_leave==8, choice([True, False], [0.20, .80]),
+#                        if(time_to_leave==9, choice([True, False], [0.18, .82]),
+#                        if(time_to_leave>=10, choice([True, False], [0.15, .85]),False))))))))))
+
+
+                        
+               - csv(period, groupby(period, status, hatlev5, nace, leave, immigrant, immigrant_new, period), fname='replacement_leave.csv', mode='a')                                
+               - remove(leave)
+                
+            immigration(): 
+               - immigrant_sim: False
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1, 2, 0)
+#               - to_immigrate: align_abs(immigrant_score, 'migration_EUROPOP.csv', filter=age<=100) 
+#               - to_immigrate: align_abs(immigrant_score, 'migration_EUROPOP_vzorka.csv', filter=age<=100) 
+#               - clone(filter=to_immigrate, immigrant_sim=True)
+               - immigrant: if(country_b!=1, True, False)
+               - immigrant: if(immigrant_sim, True, immigrant)
+               
+               
+
+               - nace1y: nace
+
+               - qual1y: qual
+               
+            nace1(): 
+               - nace_origin: nace10
+               - nace: nace10 
+               - nace1y: nace 
+               - qual: qual4
+               - qual1y: qual
+
+
+
+            csv_output():
+               - csv(dump(period, days, age, age_float, sex), fname='days_.csv')
+  
+simulation:
+   init: 
+        - person: [age1, nace1, time_to_leave1]
+   processes:   
+#        - household: [clean_empty]
+        - person: [ageing, birth, death, immigration]
+    
+   input:
+        path:   "INPUT_DATA"
+        file:   "lfs2017.h5"
+
+   output:
+        path:   "OUTPUT_DATA"
+        file:   "simulation.h5"
+        
+   start_period: 2012
+    
+   periods: 1 
+   random_seed: 1    
+            

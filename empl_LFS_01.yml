@@ -1,0 +1,1949 @@
+import: 
+     - demo_LFS_01.yml
+     - edu_LFS_01.yml
+     - ea_LFS_01.yml
+          
+globals:
+     countrytable:
+         path: global_country.csv
+         transposed: True 
+         fields:
+               - PERIOD: int
+               - cou_2_N1q1: float
+               - cou_3_N1q1: float
+               - cou_4_N1q1: float
+               - cou_2_N2q1: float
+               - cou_3_N2q1: float
+               - cou_4_N2q1: float
+               - cou_2_N3q1: float
+               - cou_3_N3q1: float
+               - cou_4_N3q1: float
+               - cou_2_N4q1: float
+               - cou_3_N4q1: float
+               - cou_4_N4q1: float
+               - cou_2_N5q1: float
+               - cou_3_N5q1: float
+               - cou_4_N5q1: float
+               - cou_2_N6q1: float
+               - cou_3_N6q1: float
+               - cou_4_N6q1: float
+               - cou_2_N7q1: float
+               - cou_3_N7q1: float
+               - cou_4_N7q1: float
+               - cou_2_N8q1: float
+               - cou_3_N8q1: float
+               - cou_4_N8q1: float
+               - cou_2_N9q1: float
+               - cou_3_N9q1: float
+               - cou_4_N9q1: float
+               - cou_2_N10q1: float
+               - cou_3_N10q1: float
+               - cou_4_N10q1: float
+          
+               - cou_2_N1q2: float
+               - cou_3_N1q2: float
+               - cou_4_N1q2: float
+               - cou_2_N2q2: float
+               - cou_3_N2q2: float
+               - cou_4_N2q2: float
+               - cou_2_N3q2: float
+               - cou_3_N3q2: float
+               - cou_4_N3q2: float
+               - cou_2_N4q2: float
+               - cou_3_N4q2: float
+               - cou_4_N4q2: float
+               - cou_2_N5q2: float
+               - cou_3_N5q2: float
+               - cou_4_N5q2: float
+               - cou_2_N6q2: float
+               - cou_3_N6q2: float
+               - cou_4_N6q2: float
+               - cou_2_N7q2: float
+               - cou_3_N7q2: float
+               - cou_4_N7q2: float
+               - cou_2_N8q2: float
+               - cou_3_N8q2: float
+               - cou_4_N8q2: float
+               - cou_2_N9q2: float
+               - cou_3_N9q2: float
+               - cou_4_N9q2: float
+               - cou_2_N10q2: float
+               - cou_3_N10q2: float
+               - cou_4_N10q2: float
+        
+               - cou_2_N1q3: float
+               - cou_3_N1q3: float
+               - cou_4_N1q3: float
+               - cou_2_N2q3: float
+               - cou_3_N2q3: float
+               - cou_4_N2q3: float
+               - cou_2_N3q3: float
+               - cou_3_N3q3: float
+               - cou_4_N3q3: float
+               - cou_2_N4q3: float
+               - cou_3_N4q3: float
+               - cou_4_N4q3: float
+               - cou_2_N5q3: float
+               - cou_3_N5q3: float
+               - cou_4_N5q3: float
+               - cou_2_N6q3: float
+               - cou_3_N6q3: float
+               - cou_4_N6q3: float
+               - cou_2_N7q3: float
+               - cou_3_N7q3: float
+               - cou_4_N7q3: float
+               - cou_2_N8q3: float
+               - cou_3_N8q3: float
+               - cou_4_N8q3: float
+               - cou_2_N9q3: float
+               - cou_3_N9q3: float
+               - cou_4_N9q3: float
+               - cou_2_N10q3: float
+               - cou_3_N10q3: float
+               - cou_4_N10q3: float
+
+               - cou_2_N1q4: float
+               - cou_3_N1q4: float
+               - cou_4_N1q4: float
+               - cou_2_N2q4: float
+               - cou_3_N2q4: float
+               - cou_4_N2q4: float
+               - cou_2_N3q4: float
+               - cou_3_N3q4: float
+               - cou_4_N3q4: float
+               - cou_2_N4q4: float
+               - cou_3_N4q4: float
+               - cou_4_N4q4: float
+               - cou_2_N5q4: float
+               - cou_3_N5q4: float
+               - cou_4_N5q4: float
+               - cou_2_N6q4: float
+               - cou_3_N6q4: float
+               - cou_4_N6q4: float
+               - cou_2_N7q4: float
+               - cou_3_N7q4: float
+               - cou_4_N7q4: float
+               - cou_2_N8q4: float
+               - cou_3_N8q4: float
+               - cou_4_N8q4: float
+               - cou_2_N9q4: float
+               - cou_3_N9q4: float
+               - cou_4_N9q4: float
+               - cou_2_N10q4: float
+               - cou_3_N10q4: float
+               - cou_4_N10q4: float
+
+         
+# definig fields from input file and new fields               
+entities: 
+     person: 
+         fields:                     
+            - replacement: {type: bool, initialdata: False}
+            - matched: {type: bool, initialdata: False}
+            - employed: {type: bool, initialdata: False}           
+            - employed_pool: {type: bool, initialdata: False} 
+            - immigrant_new: {type: bool, initialdata: False}            
+            - immigrant_sim: {type: bool, initialdata: False}  
+            - immigrant_sim2: {type: bool, initialdata: False}                
+            - immigrant_fam: {type: bool, initialdata: False}
+            - immigrant_fam_p: {type: bool, initialdata: False}
+            - country_p: {type: bool, initialdata: False}
+            
+#naceq creating 
+            - nace1q1: {type: bool, initialdata: False}
+            - nace2q1: {type: bool, initialdata: False}
+            - nace3q1: {type: bool, initialdata: False}
+            - nace4q1: {type: bool, initialdata: False}
+            - nace5q1: {type: bool, initialdata: False}
+            - nace6q1: {type: bool, initialdata: False}
+            - nace7q1: {type: bool, initialdata: False}
+            - nace8q1: {type: bool, initialdata: False}
+            - nace9q1: {type: bool, initialdata: False}
+            - nace10q1: {type: bool, initialdata: False}
+            - nace1q2: {type: bool, initialdata: False}
+            - nace2q2: {type: bool, initialdata: False}
+            - nace3q2: {type: bool, initialdata: False}
+            - nace4q2: {type: bool, initialdata: False}
+            - nace5q2: {type: bool, initialdata: False}
+            - nace6q2: {type: bool, initialdata: False}
+            - nace7q2: {type: bool, initialdata: False}
+            - nace8q2: {type: bool, initialdata: False}
+            - nace9q2: {type: bool, initialdata: False}
+            - nace10q2: {type: bool, initialdata: False}
+            - nace1q3: {type: bool, initialdata: False}
+            - nace2q3: {type: bool, initialdata: False}
+            - nace3q3: {type: bool, initialdata: False}
+            - nace4q3: {type: bool, initialdata: False}
+            - nace5q3: {type: bool, initialdata: False}
+            - nace6q3: {type: bool, initialdata: False}
+            - nace7q3: {type: bool, initialdata: False}
+            - nace8q3: {type: bool, initialdata: False}
+            - nace9q3: {type: bool, initialdata: False}
+            - nace10q3: {type: bool, initialdata: False}            
+            - nace1q4: {type: bool, initialdata: False}
+            - nace2q4: {type: bool, initialdata: False}
+            - nace3q4: {type: bool, initialdata: False}
+            - nace4q4: {type: bool, initialdata: False}
+            - nace5q4: {type: bool, initialdata: False}
+            - nace6q4: {type: bool, initialdata: False}
+            - nace7q4: {type: bool, initialdata: False}
+            - nace8q4: {type: bool, initialdata: False}
+            - nace9q4: {type: bool, initialdata: False}
+            - nace10q4: {type: bool, initialdata: False}   
+
+            - nace1_score: {type: float, initialdata: False}
+            - nace2_score: {type: float, initialdata: False}
+            - nace3_score: {type: float, initialdata: False}
+            - nace4_score: {type: float, initialdata: False}
+            - nace5_score: {type: float, initialdata: False}
+            - nace6_score: {type: float, initialdata: False}
+            - nace7_score: {type: float, initialdata: False}
+            - nace8_score: {type: float, initialdata: False}
+            - nace9_score: {type: float, initialdata: False}
+            - nace10_score: {type: float, initialdata: False}
+
+            - nace1q1_score: {type: float, initialdata: False}
+            - nace2q1_score: {type: float, initialdata: False}
+            - nace3q1_score: {type: float, initialdata: False}
+            - nace4q1_score: {type: float, initialdata: False}
+            - nace5q1_score: {type: float, initialdata: False}
+            - nace6q1_score: {type: float, initialdata: False}
+            - nace7q1_score: {type: float, initialdata: False}
+            - nace8q1_score: {type: float, initialdata: False}
+            - nace9q1_score: {type: float, initialdata: False}
+            - nace10q1_score: {type: float, initialdata: False}
+               
+            - nace1q2_score: {type: float, initialdata: False}
+            - nace2q2_score: {type: float, initialdata: False}
+            - nace3q2_score: {type: float, initialdata: False}
+            - nace4q2_score: {type: float, initialdata: False}
+            - nace5q2_score: {type: float, initialdata: False}
+            - nace6q2_score: {type: float, initialdata: False}
+            - nace7q2_score: {type: float, initialdata: False}
+            - nace8q2_score: {type: float, initialdata: False}
+            - nace9q2_score: {type: float, initialdata: False}
+            - nace10q2_score: {type: float, initialdata: False}
+               
+            - nace1q3_score: {type: float, initialdata: False}
+            - nace2q3_score: {type: float, initialdata: False}
+            - nace3q3_score: {type: float, initialdata: False}
+            - nace4q3_score: {type: float, initialdata: False}
+            - nace5q3_score: {type: float, initialdata: False}
+            - nace6q3_score: {type: float, initialdata: False}
+            - nace7q3_score: {type: float, initialdata: False}
+            - nace8q3_score: {type: float, initialdata: False}
+            - nace9q3_score: {type: float, initialdata: False}
+            - nace10q3_score: {type: float, initialdata: False}    
+
+            - nace1q4_score: {type: float, initialdata: False}
+            - nace2q4_score: {type: float, initialdata: False}
+            - nace3q4_score: {type: float, initialdata: False}
+            - nace4q4_score: {type: float, initialdata: False}
+            - nace5q4_score: {type: float, initialdata: False}
+            - nace6q4_score: {type: float, initialdata: False}
+            - nace7q4_score: {type: float, initialdata: False}
+            - nace8q4_score: {type: float, initialdata: False}
+            - nace9q4_score: {type: float, initialdata: False}
+            - nace10q4_score: {type: float, initialdata: False}               
+            
+            
+
+            
+# defining macros            
+         macros:
+# defining macros from global variables (external table)            
+            cou_2_N1q1: countrytable.cou_2_N1q1[period]
+            cou_3_N1q1: countrytable.cou_3_N1q1[period]
+            cou_4_N1q1: countrytable.cou_4_N1q1[period]
+            cou_2_N2q1: countrytable.cou_2_N2q1[period]
+            cou_3_N2q1: countrytable.cou_3_N2q1[period]
+            cou_4_N2q1: countrytable.cou_4_N2q1[period]
+            cou_2_N3q1: countrytable.cou_2_N3q1[period]
+            cou_3_N3q1: countrytable.cou_3_N3q1[period]
+            cou_4_N3q1: countrytable.cou_4_N3q1[period]
+            cou_2_N4q1: countrytable.cou_2_N4q1[period]
+            cou_3_N4q1: countrytable.cou_3_N4q1[period]
+            cou_4_N4q1: countrytable.cou_4_N4q1[period]
+            cou_2_N5q1: countrytable.cou_2_N5q1[period]
+            cou_3_N5q1: countrytable.cou_3_N5q1[period]
+            cou_4_N5q1: countrytable.cou_4_N5q1[period]
+            cou_2_N6q1: countrytable.cou_2_N6q1[period]
+            cou_3_N6q1: countrytable.cou_3_N6q1[period]
+            cou_4_N6q1: countrytable.cou_4_N6q1[period]
+            cou_2_N7q1: countrytable.cou_2_N7q1[period]
+            cou_3_N7q1: countrytable.cou_3_N7q1[period]
+            cou_4_N7q1: countrytable.cou_4_N7q1[period]
+            cou_2_N8q1: countrytable.cou_2_N8q1[period]
+            cou_3_N8q1: countrytable.cou_3_N8q1[period]
+            cou_4_N8q1: countrytable.cou_4_N8q1[period]
+            cou_2_N9q1: countrytable.cou_2_N9q1[period]
+            cou_3_N9q1: countrytable.cou_3_N9q1[period]
+            cou_4_N9q1: countrytable.cou_4_N9q1[period]
+            cou_2_N10q1: countrytable.cou_2_N10q1[period]
+            cou_3_N10q1: countrytable.cou_3_N10q1[period]
+            cou_4_N10q1: countrytable.cou_4_N10q1[period]
+            
+            cou_2_N1q2: countrytable.cou_2_N1q2[period]
+            cou_3_N1q2: countrytable.cou_3_N1q2[period]
+            cou_4_N1q2: countrytable.cou_4_N1q2[period]
+            cou_2_N2q2: countrytable.cou_2_N2q2[period]
+            cou_3_N2q2: countrytable.cou_3_N2q2[period]
+            cou_4_N2q2: countrytable.cou_4_N2q2[period]
+            cou_2_N3q2: countrytable.cou_2_N3q2[period]
+            cou_3_N3q2: countrytable.cou_3_N3q2[period]
+            cou_4_N3q2: countrytable.cou_4_N3q2[period]
+            cou_2_N4q2: countrytable.cou_2_N4q2[period]
+            cou_3_N4q2: countrytable.cou_3_N4q2[period]
+            cou_4_N4q2: countrytable.cou_4_N4q2[period]
+            cou_2_N5q2: countrytable.cou_2_N5q2[period]
+            cou_3_N5q2: countrytable.cou_3_N5q2[period]
+            cou_4_N5q2: countrytable.cou_4_N5q2[period]
+            cou_2_N6q2: countrytable.cou_2_N6q2[period]
+            cou_3_N6q2: countrytable.cou_3_N6q2[period]
+            cou_4_N6q2: countrytable.cou_4_N6q2[period]
+            cou_2_N7q2: countrytable.cou_2_N7q2[period]
+            cou_3_N7q2: countrytable.cou_3_N7q2[period]
+            cou_4_N7q2: countrytable.cou_4_N7q2[period]
+            cou_2_N8q2: countrytable.cou_2_N8q2[period]
+            cou_3_N8q2: countrytable.cou_3_N8q2[period]
+            cou_4_N8q2: countrytable.cou_4_N8q2[period]
+            cou_2_N9q2: countrytable.cou_2_N9q2[period]
+            cou_3_N9q2: countrytable.cou_3_N9q2[period]
+            cou_4_N9q2: countrytable.cou_4_N9q2[period]
+            cou_2_N10q2: countrytable.cou_2_N10q2[period]
+            cou_3_N10q2: countrytable.cou_3_N10q2[period]
+            cou_4_N10q2: countrytable.cou_4_N10q2[period]
+
+            cou_2_N1q3: countrytable.cou_2_N1q3[period]
+            cou_3_N1q3: countrytable.cou_3_N1q3[period]
+            cou_4_N1q3: countrytable.cou_4_N1q3[period]
+            cou_2_N2q3: countrytable.cou_2_N2q3[period]
+            cou_3_N2q3: countrytable.cou_3_N2q3[period]
+            cou_4_N2q3: countrytable.cou_4_N2q3[period]
+            cou_2_N3q3: countrytable.cou_2_N3q3[period]
+            cou_3_N3q3: countrytable.cou_3_N3q3[period]
+            cou_4_N3q3: countrytable.cou_4_N3q3[period]
+            cou_2_N4q3: countrytable.cou_2_N4q3[period]
+            cou_3_N4q3: countrytable.cou_3_N4q3[period]
+            cou_4_N4q3: countrytable.cou_4_N4q3[period]
+            cou_2_N5q3: countrytable.cou_2_N5q3[period]
+            cou_3_N5q3: countrytable.cou_3_N5q3[period]
+            cou_4_N5q3: countrytable.cou_4_N5q3[period]
+            cou_2_N6q3: countrytable.cou_2_N6q3[period]
+            cou_3_N6q3: countrytable.cou_3_N6q3[period]
+            cou_4_N6q3: countrytable.cou_4_N6q3[period]
+            cou_2_N7q3: countrytable.cou_2_N7q3[period]
+            cou_3_N7q3: countrytable.cou_3_N7q3[period]
+            cou_4_N7q3: countrytable.cou_4_N7q3[period]
+            cou_2_N8q3: countrytable.cou_2_N8q3[period]
+            cou_3_N8q3: countrytable.cou_3_N8q3[period]
+            cou_4_N8q3: countrytable.cou_4_N8q3[period]
+            cou_2_N9q3: countrytable.cou_2_N9q3[period]
+            cou_3_N9q3: countrytable.cou_3_N9q3[period]
+            cou_4_N9q3: countrytable.cou_4_N9q3[period]
+            cou_2_N10q3: countrytable.cou_2_N10q3[period]
+            cou_3_N10q3: countrytable.cou_3_N10q3[period]
+            cou_4_N10q3: countrytable.cou_4_N10q3[period]
+
+            cou_2_N1q4: countrytable.cou_2_N1q4[period]
+            cou_3_N1q4: countrytable.cou_3_N1q4[period]
+            cou_4_N1q4: countrytable.cou_4_N1q4[period]
+            cou_2_N2q4: countrytable.cou_2_N2q4[period]
+            cou_3_N2q4: countrytable.cou_3_N2q4[period]
+            cou_4_N2q4: countrytable.cou_4_N2q4[period]
+            cou_2_N3q4: countrytable.cou_2_N3q4[period]
+            cou_3_N3q4: countrytable.cou_3_N3q4[period]
+            cou_4_N3q4: countrytable.cou_4_N3q4[period]
+            cou_2_N4q4: countrytable.cou_2_N4q4[period]
+            cou_3_N4q4: countrytable.cou_3_N4q4[period]
+            cou_4_N4q4: countrytable.cou_4_N4q4[period]
+            cou_2_N5q4: countrytable.cou_2_N5q4[period]
+            cou_3_N5q4: countrytable.cou_3_N5q4[period]
+            cou_4_N5q4: countrytable.cou_4_N5q4[period]
+            cou_2_N6q4: countrytable.cou_2_N6q4[period]
+            cou_3_N6q4: countrytable.cou_3_N6q4[period]
+            cou_4_N6q4: countrytable.cou_4_N6q4[period]
+            cou_2_N7q4: countrytable.cou_2_N7q4[period]
+            cou_3_N7q4: countrytable.cou_3_N7q4[period]
+            cou_4_N7q4: countrytable.cou_4_N7q4[period]
+            cou_2_N8q4: countrytable.cou_2_N8q4[period]
+            cou_3_N8q4: countrytable.cou_3_N8q4[period]
+            cou_4_N8q4: countrytable.cou_4_N8q4[period]
+            cou_2_N9q4: countrytable.cou_2_N9q4[period]
+            cou_3_N9q4: countrytable.cou_3_N9q4[period]
+            cou_4_N9q4: countrytable.cou_4_N9q4[period]
+            cou_2_N10q4: countrytable.cou_2_N10q4[period]
+            cou_3_N10q4: countrytable.cou_3_N10q4[period]
+            cou_4_N10q4: countrytable.cou_4_N10q4[period]
+            
+# defining macros             
+            SLOVAKIA: 1
+            CZECH: 2
+            EU: 3
+            WORLD: 4
+
+         processes: 
+            status1():
+               - status: status                
+               
+            employment():            
+               - nace: if(not ea, -1, nace)
+               - qual: lag(qual)
+               - qual: if(not ea, -1, qual)                                   
+               - employed: False                                     
+
+               
+#    
+#             
+#    Sorting sectors according to average income from national accounts : average monthly Compensation of employees
+# 				
+#		value	nace10	average 
+#			
+#		4	ENERGY	                1775.020178
+#		7	MAR_SERVICES_2      	1744.52832
+#		2	MINING	                1551.261406
+#		9	NMAR_SERVICES       	1442.689344
+#		3	INDUSTRY	            1322.295555
+#		6	MAR_SERVICES_1      	1060.132054
+#		8	PROF_AND_ADM_SERVICES	1014.702438
+#		10	OTHER	                832.8613235
+#		1	AGRO	                785.38497
+#		5	CONSTRUCTION	        744.5053326
+#		
+# nace10:                4  7  2  9  3  6  8  10  1  5 
+
+
+# When computing nace5_score, take into account sex, region, nace_1y, ...
+
+# logit ENERGY ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY FIELD1 FIELD2 FIELD3 FIELD4 FIELD5 FIELD6 FIELD7 FIELD8 FIELD9 FIELD10 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57 AGEG62, iter(10)
+# logit MAR_SERVICES_2 ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY FIELD1 FIELD2 FIELD3 FIELD4 FIELD5 FIELD6 FIELD7 FIELD8 FIELD9 FIELD10 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57 AGEG62, iter(10)
+# logit MINING ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY FIELD2 FIELD3 FIELD4 FIELD5 FIELD6 FIELD7 FIELD8 FIELD9 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57 AGEG62, iter(10)
+# logit NMAR_SERVICES ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY FIELD0 FIELD1 FIELD2 FIELD3 FIELD4 FIELD5 FIELD6 FIELD7 FIELD8 FIELD9 FIELD10 AGEG17 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57 AGEG62, iter(10)
+# logit INDUSTRY ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY FIELD1 FIELD2 FIELD3 FIELD4 FIELD5 FIELD6 FIELD7 FIELD8 FIELD9 FIELD10 AGEG17 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57 AGEG62, iter(10)
+# logit MAR_SERVICES_1 ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY FIELD1 FIELD2 FIELD3 FIELD4 FIELD5 FIELD6 FIELD7 FIELD8 FIELD9 FIELD10 AGEG17 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57 AGEG62, iter(10)
+# logit PROF_AND_ADM_SERVICES ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY FIELD1 FIELD2 FIELD3 FIELD4 FIELD5 FIELD6 FIELD7 FIELD8 FIELD9 FIELD10 AGEG17 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57 AGEG62, iter(10)
+# logit OTHER ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY FIELD1 FIELD2 FIELD3 FIELD4 FIELD5 FIELD6 FIELD7 FIELD8 FIELD9 FIELD10 AGEG17 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57 AGEG62, iter(10)
+# logit AGRO ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY FIELD1 FIELD2 FIELD3 FIELD4 FIELD5 FIELD6 FIELD7 FIELD8 FIELD9 FIELD10 AGEG17 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57 AGEG62, iter(10)
+# logit CONSTRUCTION ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY FIELD0 FIELD1 FIELD2 FIELD3 FIELD4 FIELD5 FIELD6 FIELD7 FIELD8 FIELD9 FIELD10 AGEG17 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57 AGEG62, iter(10)
+
+# counting score:
+            employment_nace_score():
+               - nace4_score: if(ea, logit_score(ISFEMALE*(-1.054818)+PRIMARY*(0.4932788)+LOWER_SECONDARY*(-0.5823839)+UPPER_SECONDARY*(-0.2138232)+POST_SECONDARY*(0.0315645)+FIELD1*(-0.060931)+FIELD2*(-0.1687549)+FIELD3*(-0.5297428)+FIELD4*(1.088935)+FIELD5*(1.203483)+FIELD6*(0.4988279)+FIELD7*(1.385767)+FIELD8*(0.6086209)+FIELD9*(-0.1368731)+FIELD10*(0.0394245)+AGEG22*(2.701225)+AGEG27*(3.394946)+AGEG32*(3.783914)+AGEG37*(3.897333)+AGEG42*(4.047676)+AGEG47*(4.388965)+AGEG52*(4.382556)+AGEG57*(4.355175)+AGEG62*(3.281932)+1*(-8.348174)),0)
+               - nace7_score: if(ea, logit_score(ISFEMALE*(-0.2853918)+PRIMARY*(-6.42544)+LOWER_SECONDARY*(-3.119548)+UPPER_SECONDARY*(-1.211496)+POST_SECONDARY*(-1.574482)+FIELD1*(-1.74998)+FIELD2*(-0.8511891)+FIELD3*(-0.1611083)+FIELD4*(-0.1109231)+FIELD5*(-0.835201)+FIELD6*(1.26196)+FIELD7*(-0.7749148)+FIELD8*(-1.427082)+FIELD9*(-2.224025)+FIELD10*(-0.8291053)+AGEG22*(1.737797)+AGEG27*(2.57952)+AGEG32*(2.592468)+AGEG37*(2.711115)+AGEG42*(2.786678)+AGEG47*(2.607645)+AGEG52*(2.374798)+AGEG57*(2.509896)+AGEG62*(1.866972)+1*(-3.922656)),0)
+               - nace2_score: if(ea, logit_score(ISFEMALE*(-1.578419)+PRIMARY*(-0.1026951)+LOWER_SECONDARY*(-0.1339169)+UPPER_SECONDARY*(-0.0089909)+FIELD2*(1.910263)+FIELD3*(-0.3600727)+FIELD4*(1.970692)+FIELD5*(1.730352)+FIELD6*(1.057872)+FIELD7*(1.781857)+FIELD8*(-0.36088)+FIELD9*(1.068232)+AGEG22*(0.8656062)+AGEG27*(1.669895)+AGEG32*(2.271223)+AGEG37*(1.495267)+AGEG42*(1.946403)+AGEG47*(1.674173)+AGEG52*(2.64893)+AGEG57*(1.935351)+AGEG62*(-1.462348)+1*(-8.410643)),0)
+               - nace9_score: if(ea, logit_score(ISFEMALE*(0.6409069)+PRIMARY*(-0.8858155)+LOWER_SECONDARY*(-0.9276225)+UPPER_SECONDARY*(-0.6110636)+POST_SECONDARY*(0.2812542)+FIELD0*(-0.1072451)+FIELD1*(1.791507)+FIELD2*(0.2158759)+FIELD3*(0.0375963)+FIELD4*(-0.310905)+FIELD5*(-0.1909397)+FIELD6*(-0.6340115)+FIELD7*(-0.6114717)+FIELD8*(-0.4897841)+FIELD9*(1.585859)+FIELD10*(0.13427)+AGEG17*(0.208406)+AGEG22*(1.964822)+AGEG27*(2.776605)+AGEG32*(3.139973)+AGEG37*(3.462605)+AGEG42*(3.810033)+AGEG47*(3.945763)+AGEG52*(4.108044)+AGEG57*(4.186441)+AGEG62*(2.97468)+1*(-4.966363)),0)
+               - nace3_score: if(ea, logit_score(ISFEMALE*(-0.304165)+PRIMARY*(0.3647439)+LOWER_SECONDARY*(0.5240591)+UPPER_SECONDARY*(0.5427906)+POST_SECONDARY*(-0.0650248)+FIELD1*(-0.8348934)+FIELD2*(0.3029837)+FIELD3*(0.2669516)+FIELD4*(0.3983907)+FIELD5*(0.7598264)+FIELD6*(0.5333869)+FIELD7*(1.254844)+FIELD8*(0.7551632)+FIELD9*(-0.6382784)+FIELD10*(0.4300705)+AGEG17*(2.173582)+AGEG22*(4.283023)+AGEG27*(4.782525)+AGEG32*(4.615883)+AGEG37*(4.636031)+AGEG42*(4.526883)+AGEG47*(4.472256)+AGEG52*(4.341654)+AGEG57*(4.203446)+AGEG62*(2.880289)+1*(-6.970161)),0)
+               - nace6_score: if(ea, logit_score(ISFEMALE*(-0.1188131)+PRIMARY*(-0.8643165)+LOWER_SECONDARY*(0.6836644)+UPPER_SECONDARY*(0.8286456)+POST_SECONDARY*(0.0875009)+FIELD1*(-0.4848082)+FIELD2*(-0.0415051)+FIELD3*(0.6308096)+FIELD4*(0.7371242)+FIELD5*(0.0643604)+FIELD6*(-0.0836057)+FIELD7*(0.142681)+FIELD8*(0.1301066)+FIELD9*(0.0986092)+FIELD10*(0.9190696)+AGEG17*(2.116674)+AGEG22*(3.315833)+AGEG27*(3.729523)+AGEG32*(3.654502)+AGEG37*(3.77398)+AGEG42*(3.815699)+AGEG47*(3.717527)+AGEG52*(3.665363)+AGEG57*(3.237282)+AGEG62*(2.379914)+1*(-6.010568)),0)
+               - nace8_score: if(ea, logit_score(ISFEMALE*(-0.0199314)+PRIMARY*(-1.228107)+LOWER_SECONDARY*(-1.372102)+UPPER_SECONDARY*(-0.9995673)+POST_SECONDARY*(0.1764404)+FIELD1*(-2.286603)+FIELD2*(0.2972844)+FIELD3*(0.0061088)+FIELD4*(0.3209057)+FIELD5*(0.2555972)+FIELD6*(-0.4353496)+FIELD7*(-0.4442599)+FIELD8*(0.0254719)+FIELD9*(-2.091249)+FIELD10*(-0.7792049)+AGEG17*(-0.1851206)+AGEG22*(2.342872)+AGEG27*(2.854177)+AGEG32*(2.905124)+AGEG37*(2.901241)+AGEG42*(3.090268)+AGEG47*(3.201637)+AGEG52*(3.119778)+AGEG57*(2.903082)+AGEG62*(2.558509)+1*(+4.964823)),0)
+               - nace10_score: if(ea, logit_score(ISFEMALE*(0.2638509)+PRIMARY*(-1.347254)+LOWER_SECONDARY*(0.0353628)+UPPER_SECONDARY*(0.2360061)+POST_SECONDARY*(0.5033448)+FIELD1*(-0.0563386)+FIELD2*(1.948223)+FIELD3*(-0.0620482)+FIELD4*(-0.1720312)+FIELD5*(0.2712988)+FIELD6*(0.4252067)+FIELD7*(-0.533774)+FIELD8*(-0.1573354)+FIELD9*(-0.6094699)+FIELD10*(1.174699)+AGEG17*(1.602351)+AGEG22*(2.165038)+AGEG27*(2.379758)+AGEG32*(2.572119)+AGEG37*(2.344731)+AGEG42*(2.672891)+AGEG47*(2.828772)+AGEG52*(2.448846)+AGEG57*(2.452023)+AGEG62*(1.796048)+1*(-6.628578)),0)
+               - nace1_score: if(ea, logit_score(ISFEMALE*(-1.079807)+PRIMARY*(0.6499726)+LOWER_SECONDARY*(0.5691802)+UPPER_SECONDARY*(0.4270695)+POST_SECONDARY*(0.405988)+FIELD1*(-1.547937)+FIELD2*(0.2980793)+FIELD3*(0.1876745)+FIELD4*(0.8560576)+FIELD5*(0.7399182)+FIELD6*(-0.0671444)+FIELD7*(0.5906077)+FIELD8*(2.883163)+FIELD9*(-2.826153)+FIELD10*(-0.2051646)+AGEG17*(-0.2883578)+AGEG22*(2.593106)+AGEG27*(2.540987)+AGEG32*(2.914597)+AGEG37*(2.900628)+AGEG42*(2.841113)+AGEG47*(2.732692)+AGEG52*(3.373124)+AGEG57*(3.416183)+AGEG62*(2.372216)+1*(-7.678965)),0)
+               - nace5_score: if(ea, logit_score(ISFEMALE*(-2.371563)+PRIMARY*(0.0130687)+LOWER_SECONDARY*(0.2527589)+UPPER_SECONDARY*(-0.0073679)+POST_SECONDARY*(-0.0398054)+FIELD0*(3.536204)+FIELD1*(-0.798502)+FIELD2*(-1.049174)+FIELD3*(-0.1515973)+FIELD4*(0.1460956)+FIELD5*(0.3184999)+FIELD6*(-0.4217857)+FIELD7*(1.030248)+FIELD8*(0.3084773)+FIELD9*(-0.5903441)+FIELD10*(0.1050487)+AGEG17*(1.875355)+AGEG22*(3.731206)+AGEG27*(3.984388)+AGEG32*(3.901934)+AGEG37*(3.988999)+AGEG42*(3.958208)+AGEG47*(4.067575)+AGEG52*(3.679136)+AGEG57*(3.693138)+AGEG62*(2.87128)+1*(+6.53377)),0)
+               
+               - nace4_score: nace4_score + 1                  
+               - nace7_score: nace7_score + 1   
+               - nace2_score: nace2_score + 1   
+               - nace9_score: nace9_score + 1   
+               - nace3_score: nace3_score + 1   
+               - nace6_score: nace6_score + 1            
+               - nace8_score: nace8_score + 1     
+               - nace10_score: nace10_score + 1                  
+               - nace1_score: nace1_score + 1  
+               - nace5_score: nace5_score + 1           
+               
+               
+               - nace4_score: if(working_retired==True and (lag(nace==4)), nace4_score+0.6, nace4_score)
+               - nace4_score: if(working_retired==True, nace4_score+0.6, nace4_score)               
+               - nace7_score: if(working_retired==True and (lag(nace==7)), nace7_score+0.6, nace7_score)
+               - nace7_score: if(working_retired==True, nace7_score+0.6, nace7_score)      
+               - nace2_score: if(working_retired==True and (lag(nace==2)), nace2_score+0.6, nace2_score)
+               - nace2_score: if(working_retired==True, nace2_score+0.6, nace2_score)
+               - nace9_score: if(working_retired==True and (lag(nace==9)), nace9_score+0.6, nace9_score)
+               - nace9_score: if(working_retired==True, nace9_score+0.6, nace9_score)    
+               - nace3_score: if(working_retired==True and (lag(nace==3)), nace3_score+0.6, nace3_score)
+               - nace3_score: if(working_retired==True, nace3_score+0.6, nace3_score)
+               - nace6_score: if(working_retired==True and (lag(nace==6)), nace6_score+0.6, nace6_score)
+               - nace6_score: if(working_retired==True, nace6_score+0.6, nace6_score) 
+               - nace8_score: if(working_retired==True and (lag(nace==8)), nace8_score+0.6, nace8_score)
+               - nace8_score: if(working_retired==True, nace8_score+0.6, nace8_score) 
+               - nace10_score: if(working_retired==True and (lag(nace==10)), nace10_score+0.6, nace10_score)
+               - nace10_score: if(working_retired==True , nace10_score+0.6, nace10_score)
+               - nace1_score: if(working_retired==True and (lag(nace==1)), nace1_score+0.6, nace1_score)
+               - nace1_score: if(working_retired==True, nace1_score+0.6, nace1_score)
+               - nace5_score: if(working_retired==True and (lag(nace==5)), nace5_score+0.6, nace5_score)        
+               - nace5_score: if(working_retired==True , nace5_score+0.6, nace5_score)   
+
+#nace skore
+               - nace1q1_score: if(lag(nace==1 and qual==1) , nace1_score+0.3, nace1_score)
+               - nace2q1_score: if(lag(nace==2 and qual==1) , nace2_score+0.3, nace2_score)
+               - nace3q1_score: if(lag(nace==3 and qual==1) , nace3_score+0.3, nace3_score)
+               - nace4q1_score: if(lag(nace==4 and qual==1) , nace4_score+0.3, nace4_score)
+               - nace5q1_score: if(lag(nace==5 and qual==1) , nace5_score+0.3, nace5_score)
+               - nace6q1_score: if(lag(nace==6 and qual==1) , nace6_score+0.3, nace6_score)
+               - nace7q1_score: if(lag(nace==7 and qual==1) , nace7_score+0.3, nace7_score)
+               - nace8q1_score: if(lag(nace==8 and qual==1) , nace8_score+0.3, nace8_score)
+               - nace9q1_score: if(lag(nace==9 and qual==1) , nace9_score+0.3, nace9_score)
+               - nace10q1_score: if(lag(nace==10 and qual==1) , nace10_score+0.3, nace10_score)
+               
+               - nace1q2_score: if(lag(nace==1 and qual==2) , nace1_score+0.3, nace1_score)
+               - nace2q2_score: if(lag(nace==2 and qual==2) , nace2_score+0.3, nace2_score)
+               - nace3q2_score: if(lag(nace==3 and qual==2) , nace3_score+0.3, nace3_score)
+               - nace4q2_score: if(lag(nace==4 and qual==2) , nace4_score+0.3, nace4_score)
+               - nace5q2_score: if(lag(nace==5 and qual==2) , nace5_score+0.3, nace5_score)
+               - nace6q2_score: if(lag(nace==6 and qual==2) , nace6_score+0.3, nace6_score)
+               - nace7q2_score: if(lag(nace==7 and qual==2) , nace7_score+0.3, nace7_score)
+               - nace8q2_score: if(lag(nace==8 and qual==2) , nace8_score+0.3, nace8_score)
+               - nace9q2_score: if(lag(nace==9 and qual==2) , nace9_score+0.3, nace9_score)
+               - nace10q2_score: if(lag(nace==10 and qual==2) , nace10_score+0.3, nace10_score)
+               
+               - nace1q3_score: if(lag(nace==1 and qual==3) , nace1_score+0.3, nace1_score)
+               - nace2q3_score: if(lag(nace==2 and qual==3) , nace2_score+0.3, nace2_score)
+               - nace3q3_score: if(lag(nace==3 and qual==3) , nace3_score+0.3, nace3_score)
+               - nace4q3_score: if(lag(nace==4 and qual==3) , nace4_score+0.3, nace4_score)
+               - nace5q3_score: if(lag(nace==5 and qual==3) , nace5_score+0.3, nace5_score)
+               - nace6q3_score: if(lag(nace==6 and qual==3) , nace6_score+0.3, nace6_score)
+               - nace7q3_score: if(lag(nace==7 and qual==3) , nace7_score+0.3, nace7_score)
+               - nace8q3_score: if(lag(nace==8 and qual==3) , nace8_score+0.3, nace8_score)
+               - nace9q3_score: if(lag(nace==9 and qual==3) , nace9_score+0.3, nace9_score)
+               - nace10q3_score: if(lag(nace==10 and qual==3) , nace10_score+0.3, nace10_score)
+               
+               - nace1q4_score: if(lag(nace==1 and qual==4) , nace1_score+0.3, nace1_score)
+               - nace2q4_score: if(lag(nace==2 and qual==4) , nace2_score+0.3, nace2_score)
+               - nace3q4_score: if(lag(nace==3 and qual==4) , nace3_score+0.3, nace3_score)
+               - nace4q4_score: if(lag(nace==4 and qual==4) , nace4_score+0.3, nace4_score)
+               - nace5q4_score: if(lag(nace==5 and qual==4) , nace5_score+0.3, nace5_score)
+               - nace6q4_score: if(lag(nace==6 and qual==4) , nace6_score+0.3, nace6_score)
+               - nace7q4_score: if(lag(nace==7 and qual==4) , nace7_score+0.3, nace7_score)
+               - nace8q4_score: if(lag(nace==8 and qual==4) , nace8_score+0.3, nace8_score)
+               - nace9q4_score: if(lag(nace==9 and qual==4) , nace9_score+0.3, nace9_score)
+               - nace10q4_score: if(lag(nace==10 and qual==4) , nace10_score+0.3, nace10_score)
+              
+               
+               
+            employment_nace():               
+################################### Q1  
+# Nace 4               
+               - nace4q1: if(ea and not employed, if(lag(N4q1)<N4q1, align_abs(nace4q1_score, lag(N4q1), take=lag(nace==4 and qual==1) and ea),align_abs(nace4q1_score, N4q1, leave=lag(nace!=4 and qual!=1))),False)
+               - employed: if(nace4q1,True, employed)   
+# Nace 7
+               - nace7q1: if(ea and not employed, if(lag(N7q1)<N7q1, align_abs(nace7q1_score, lag(N7q1), take=lag(nace==7 and qual==1) and ea),align_abs(nace7q1_score, N7q1, leave=lag(nace!=7 and qual!=1))),False)
+               - employed: if(nace7q1,True, employed)
+# Nace 2
+               - nace2q1: if(ea and not employed, if(lag(N2q1)<N2q1, align_abs(nace2q1_score, lag(N2q1), take=lag(nace==2 and qual==1) and ea),align_abs(nace2q1_score, N2q1, leave=lag(nace!=2 and qual!=1))),False)
+               - employed: if(nace2q1,True, employed) 
+# Nace 9  
+               - nace9q1: if(ea and not employed, if(lag(N9q1)<N9q1, align_abs(nace9q1_score, lag(N9q1), take=lag(nace==9 and qual==1) and ea),align_abs(nace9q1_score, N9q1, leave=lag(nace!=9 and qual!=1))),False)
+               - employed: if(nace9q1,True, employed)               
+# Nace 3               
+               - nace3q1: if(ea and not employed, if(lag(N3q1)<N3q1, align_abs(nace3q1_score, lag(N3q1), take=lag(nace==3 and qual==1) and ea),align_abs(nace3q1_score, N3q1, leave=lag(nace!=3 and qual!=1))),False)
+               - employed: if(nace3q1,True, employed)                 
+# Nace 6               
+               - nace6q1: if(ea and not employed, if(lag(N6q1)<N6q1, align_abs(nace6q1_score, lag(N6q1), take=lag(nace==6 and qual==1) and ea),align_abs(nace6q1_score, N6q1, leave=lag(nace!=6 and qual!=1))),False)
+               - employed: if(nace6q1,True, employed)   
+# Nace 8                
+               - nace8q1: if(ea and not employed, if(lag(N8q1)<N8q1, align_abs(nace8q1_score, lag(N8q1), take=lag(nace==8 and qual==1) and ea),align_abs(nace8q1_score, N8q1, leave=lag(nace!=8 and qual!=1))),False)
+               - employed: if(nace8q1,True, employed)
+# Nace 10              
+               - nace10q1: if(ea and not employed, if(lag(N10q1)<N10q1, align_abs(nace10q1_score, lag(N10q1), take=lag(nace==10 and qual==1) and ea),align_abs(nace10q1_score, N10q1, leave=lag(nace!=10 and qual!=1))),False)
+               - employed: if(nace10q1,True, employed)               
+# Nace 1
+               - nace1q1: if(ea and not employed, if(lag(N1q1)<N1q1, align_abs(nace1q1_score, lag(N1q1), take=lag(nace==1 and qual==1) and ea),align_abs(nace1q1_score, N1q1, leave=lag(nace!=1 and qual!=1))),False)
+               - employed: if(nace1q1,True, employed)               
+# Nace 5
+               - nace5q1: if(ea and not employed, if(lag(N5q1)<N5q1, align_abs(nace5q1_score, lag(N5q1), take=lag(nace==5 and qual==1) and ea),align_abs(nace5q1_score, N5q1, leave=lag(nace!=5 and qual!=1))),False)
+               - employed: if(nace5q1,True, employed)            
+             
+################################### Q2               
+# Nace 4               
+               - nace4q2: if(ea and not employed, if(lag(N4q2)<N4q2, align_abs(nace4q2_score, lag(N4q2), take=lag(nace==4 and qual==2) and ea),align_abs(nace4q2_score, N4q2, leave=lag(nace!=4 and qual!=2))),False)
+               - employed: if(nace4q2,True, employed)  
+# Nace 7
+               - nace7q2: if(ea and not employed, if(lag(N7q2)<N7q2, align_abs(nace7q2_score, lag(N7q2), take=lag(nace==7 and qual==2) and ea),align_abs(nace7q2_score, N7q2, leave=lag(nace!=7 and qual!=2))),False)
+               - employed: if(nace7q2,True, employed)
+# Nace 2
+               - nace2q2: if(ea and not employed, if(lag(N2q2)<N2q2, align_abs(nace2q2_score, lag(N2q2), take=lag(nace==2 and qual==2) and ea),align_abs(nace2q2_score, N2q2, leave=lag(nace!=2 and qual!=2))),False)
+               - employed: if(nace2q2,True, employed)
+# Nace 9  
+               - nace9q2: if(ea and not employed, if(lag(N9q2)<N9q2, align_abs(nace9q2_score, lag(N9q2), take=lag(nace==9 and qual==2) and ea),align_abs(nace9q2_score, N9q2, leave=lag(nace!=9 and qual!=2))),False)
+               - employed: if(nace9q2,True, employed)  
+# Nace 3               
+               - nace3q2: if(ea and not employed, if(lag(N3q2)<N3q2, align_abs(nace3q2_score, lag(N3q2), take=lag(nace==3 and qual==2) and ea),align_abs(nace3q2_score, N3q2, leave=lag(nace!=3 and qual!=2))),False)
+               - employed: if(nace3q2,True, employed)                
+# Nace 6               
+               - nace6q2: if(ea and not employed, if(lag(N6q2)<N6q2, align_abs(nace6q2_score, lag(N6q2), take=lag(nace==6 and qual==2) and ea),align_abs(nace6q2_score, N6q2, leave=lag(nace!=6 and qual!=2))),False)
+               - employed: if(nace6q2,True, employed)    
+# Nace 8
+               - nace8q2: if(ea and not employed, if(lag(N8q2)<N8q2, align_abs(nace8q2_score, lag(N8q2), take=lag(nace==8 and qual==2) and ea),align_abs(nace8q2_score, N8q2, leave=lag(nace!=8 and qual!=2))),False)
+               - employed: if(nace8q2,True, employed)
+# Nace 10              
+               - nace10q2: if(ea and not employed, if(lag(N10q2)<N10q2, align_abs(nace10q2_score, lag(N10q2), take=lag(nace==10 and qual==2) and ea),align_abs(nace10q2_score, N10q2, leave=lag(nace!=10 and qual!=2))),False)
+               - employed: if(nace10q2,True, employed) 
+# Nace 1
+               - nace1q2: if(ea and not employed, if(lag(N1q2)<N1q2, align_abs(nace1q2_score, lag(N1q2), take=lag(nace==1 and qual==2) and ea),align_abs(nace1q2_score, N1q2, leave=lag(nace!=1 and qual!=2))),False)
+               - employed: if(nace1q2,True, employed)                 
+# Nace 5
+               - nace5q2: if(ea and not employed, if(lag(N5q2)<N5q2, align_abs(nace5q2_score, lag(N5q2), take=lag(nace==5 and qual==2) and ea),align_abs(nace5q2_score, N5q2, leave=lag(nace!=5 and qual!=2))),False)
+               - employed: if(nace5q2,True, employed)
+
+################################### Q3
+# Nace 4               
+               - nace4q3: if(ea and not employed, if(lag(N4q3)<N4q3, align_abs(nace4q3_score, lag(N4q3), take=lag(nace==4 and qual==3) and ea),align_abs(nace4q3_score, N4q3, leave=lag(nace!=4 and qual!=3))),False)
+               - employed: if(nace4q3,True, employed)   
+# Nace 7
+               - nace7q3: if(ea and not employed, if(lag(N7q3)<N7q3, align_abs(nace7q3_score, lag(N7q3), take=lag(nace==7 and qual==3) and ea),align_abs(nace7q3_score, N7q3, leave=lag(nace!=7 and qual!=3))),False)
+               - employed: if(nace7q3,True, employed)
+# Nace 2
+               - nace2q3: if(ea and not employed, if(lag(N2q3)<N2q3, align_abs(nace2q3_score, lag(N2q3), take=lag(nace==2 and qual==3) and ea),align_abs(nace2q3_score, N2q3, leave=lag(nace!=2 and qual!=3))),False)
+               - employed: if(nace2q3,True, employed)
+# Nace 9  
+               - nace9q3: if(ea and not employed, if(lag(N9q3)<N9q3, align_abs(nace9q3_score, lag(N9q3), take=lag(nace==9 and qual==3) and ea),align_abs(nace9q3_score, N9q3, leave=lag(nace!=9 and qual!=3))),False)
+               - employed: if(nace9q3,True, employed) 
+# Nace 3               
+               - nace3q3: if(ea and not employed, if(lag(N3q3)<N3q3, align_abs(nace3q3_score, lag(N3q3), take=lag(nace==3 and qual==3) and ea),align_abs(nace3q3_score, N3q3, leave=lag(nace!=3 and qual!=3))),False)
+               - employed: if(nace3q3,True, employed)  
+# Nace 6               
+               - nace6q3: if(ea and not employed, if(lag(N6q3)<N6q3, align_abs(nace6q3_score, lag(N6q3), take=lag(nace==6 and qual==3) and ea),align_abs(nace6q3_score, N6q3, leave=lag(nace!=6 and qual!=3))),False)
+               - employed: if(nace6q3,True, employed)    
+# Nace 8
+               - nace8q3: if(ea and not employed, if(lag(N8q3)<N8q3, align_abs(nace8q3_score, lag(N8q3), take=lag(nace==8 and qual==3) and ea),align_abs(nace8q3_score, N8q3, leave=lag(nace!=8 and qual!=3))),False)
+               - employed: if(nace8q3,True, employed)
+# Nace 10              
+               - nace10q3: if(ea and not employed, if(lag(N10q3)<N10q3, align_abs(nace10q3_score, lag(N10q3), take=lag(nace==10 and qual==3) and ea),align_abs(nace10q3_score, N10q3, leave=lag(nace!=10 and qual!=3))),False)
+               - employed: if(nace10q3,True, employed)  
+# Nace 1
+               - nace1q3: if(ea and not employed, if(lag(N1q3)<N1q3, align_abs(nace1q3_score, lag(N1q3), take=lag(nace==1 and qual==3) and ea),align_abs(nace1q3_score, N1q3, leave=lag(nace!=1 and qual!=3))),False)
+               - employed: if(nace1q3,True, employed)                  
+# Nace 5
+               - nace5q3: if(ea and not employed, if(lag(N5q3)<N5q3, align_abs(nace5q3_score, lag(N5q3), take=lag(nace==5 and qual==3) and ea),align_abs(nace5q3_score, N5q3, leave=lag(nace!=5 and qual!=3))),False)
+               - employed: if(nace5q3,True, employed)
+
+               
+################################### Q4
+# Nace 4               
+               - nace4q4: if(ea and not employed, if(lag(N4q4)<N4q4, align_abs(nace4q4_score, lag(N4q4), take=lag(nace==4 and qual==3) and ea),align_abs(nace4q4_score, N4q4, leave=lag(nace!=4 and qual!=3))),False)
+               - employed: if(nace4q4,True, employed)   
+# Nace 7
+               - nace7q4: if(ea and not employed, if(lag(N7q4)<N7q4, align_abs(nace7q4_score, lag(N7q4), take=lag(nace==7 and qual==3) and ea),align_abs(nace7q4_score, N7q4, leave=lag(nace!=7 and qual!=3))),False)
+               - employed: if(nace7q4,True, employed)
+# Nace 2
+               - nace2q4: if(ea and not employed, if(lag(N2q4)<N2q4, align_abs(nace2q4_score, lag(N2q4), take=lag(nace==2 and qual==3) and ea),align_abs(nace2q4_score, N2q4, leave=lag(nace!=2 and qual!=3))),False)
+               - employed: if(nace2q4,True, employed)
+# Nace 9  
+               - nace9q4: if(ea and not employed, if(lag(N9q4)<N9q4, align_abs(nace9q4_score, lag(N9q4), take=lag(nace==9 and qual==3) and ea),align_abs(nace9q4_score, N9q4, leave=lag(nace!=9 and qual!=3))),False)
+               - employed: if(nace9q4,True, employed) 
+# Nace 3               
+               - nace3q4: if(ea and not employed, if(lag(N3q4)<N3q4, align_abs(nace3q4_score, lag(N3q4), take=lag(nace==3 and qual==3) and ea),align_abs(nace3q4_score, N3q4, leave=lag(nace!=3 and qual!=3))),False)
+               - employed: if(nace3q4,True, employed)  
+# Nace 6               
+               - nace6q4: if(ea and not employed, if(lag(N6q4)<N6q4, align_abs(nace6q4_score, lag(N6q4), take=lag(nace==6 and qual==3) and ea),align_abs(nace6q4_score, N6q4, leave=lag(nace!=6 and qual!=3))),False)
+               - employed: if(nace6q4,True, employed)    
+# Nace 8
+               - nace8q4: if(ea and not employed, if(lag(N8q4)<N8q4, align_abs(nace8q4_score, lag(N8q4), take=lag(nace==8 and qual==3) and ea),align_abs(nace8q4_score, N8q4, leave=lag(nace!=8 and qual!=3))),False)
+               - employed: if(nace8q4,True, employed)
+# Nace 10              
+               - nace10q4: if(ea and not employed, if(lag(N10q4)<N10q4, align_abs(nace10q4_score, lag(N10q4), take=lag(nace==10 and qual==3) and ea),align_abs(nace10q4_score, N10q4, leave=lag(nace!=10 and qual!=3))),False)
+               - employed: if(nace10q4,True, employed)  
+# Nace 1
+               - nace1q4: if(ea and not employed, if(lag(N1q4)<N1q4, align_abs(nace1q4_score, lag(N1q4), take=lag(nace==1 and qual==3) and ea),align_abs(nace1q4_score, N1q4, leave=lag(nace!=1 and qual!=3))),False)
+               - employed: if(nace1q4,True, employed)                  
+# Nace 5
+               - nace5q4: if(ea and not employed, if(lag(N5q4)<N5q4, align_abs(nace5q4_score, lag(N5q4), take=lag(nace==5 and qual==3) and ea),align_abs(nace5q4_score, N5q4, leave=lag(nace!=5 and qual!=3))),False)
+               - employed: if(nace5q4,True, employed)
+               
+               
+################################### EMPLOYED POOL     
+          
+               - employed_p: if(ea and not employed, True,False)
+# logit IS_UNEMPLOYED ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY L_AGRO L_MINING L_INDUSTRY L_ENERGY L_CONSTRUCTION L_MAR_SERVICES_1 L_MAR_SERVICES_2 L_PROF_AND_ADM_SERVICES L_NMAR_SERVICES L_OTHER AGEG17 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57, iter(10)
+               - unemployment_score: logit_score(ISFEMALE*(-0.4309393)+PRIMARY*(0.6379875)+LOWER_SECONDARY*(0.7570611)+UPPER_SECONDARY*(0.4855633)+POST_SECONDARY*(-0.4263487)+L_AGRO*(-2.591605)+L_MINING*(-3.935015)+L_INDUSTRY*(-2.450545)+L_ENERGY*(-3.375773)+L_CONSTRUCTION*(-2.971109)+L_MAR_SERVICES_1*(-2.215553)+L_MAR_SERVICES_2*(-2.248613)+L_PROF_AND_ADM_SERVICES*(-2.149521)+L_NMAR_SERVICES*(-2.744647)+L_OTHER*(-1.995462)+AGEG17*(14.57467)+AGEG22*(16.1678)+AGEG27*(16.73375)+AGEG32*(16.67399)+AGEG37*(16.75253)+AGEG42*(16.70901)+AGEG47*(16.67123)+AGEG52*(16.7188)+AGEG57*(16.3256)+1*(-18.36121))
+               - unemployment_score: if(lag(status==2), unemployment_score+1, unemployment_score)
+               - unemployment_score: if(lag(status==3), unemployment_score-0.5, unemployment_score)
+               - unemployed_pool: if(employed_p, 
+                                    if(country_b==1,align(unemployment_score, [unem_rate, 1-unem_rate], leave=student or disabled),align(unemployment_score, [0.50, 0.50], leave=student or disabled)),False)
+#               - unemployed_pool: if(lag(status)==3 and unemployed_pool, align(unemployment_score, [0.25, 0.75], [True, False]), unemployed_pool)
+               - unemployed_pool: if(lag(status)==3 and unemployed_pool, False, unemployed_pool)
+               - unemployed_pool: if(lag(status)==3, align(unemployment_score, [0.10, 0.90]), unemployed_pool)
+               - employed_pool: if(ea and not employed and not unemployed_pool, True, False)
+
+
+            
+               
+               
+               
+################################### Q1     
+# Nace 4
+               - nace4q1p: if(ea and not employed and employed_pool, align(nace4_score, 'align_nace4q1.csv'), False) 
+               - nace4q1: if(ea and employed_pool and count(nace4q1)<N4q1,
+                            if(count(nace4q1p)>N4q1-count(nace4q1), align_abs(nace4_score, N4q1-count(nace4q1), leave=nace4q1p==False),align_abs(nace4_score, N4q1-count(nace4q1), take=nace4q1p==True and ea)),nace4q1)
+               - employed: if(nace4q1,True, employed)
+               - employed_pool: if(nace4q1,False, employed_pool)  
+# Nace 7
+               - nace7q1p: if(ea and not employed and employed_pool, align(nace7_score, 'align_nace7q1.csv'), False) 
+               - nace7q1: if(ea and employed_pool and count(nace7q1)<N7q1,
+                            if(count(nace7q1p)>N7q1-count(nace7q1), align_abs(nace7_score, N7q1-count(nace7q1), leave=nace7q1p==False),align_abs(nace7_score, N7q1-count(nace7q1), take=nace7q1p==True and ea)),nace7q1)
+               - employed: if(nace7q1,True, employed)
+               - employed_pool: if(nace7q1,False, employed_pool) 
+# Nace 2
+               - nace2q1p: if(ea and not employed and employed_pool, align(nace2_score, 'align_nace2q1.csv'), False) 
+               - nace2q1: if(ea and employed_pool and count(nace2q1)<N2q1,
+                            if(count(nace2q1p)>N2q1-count(nace2q1), align_abs(nace2_score, N2q1-count(nace2q1), leave=nace2q1p==False),align_abs(nace2_score, N2q1-count(nace2q1), take=nace2q1p==True and ea)),nace2q1)
+               - employed: if(nace2q1,True, employed) 
+               - employed_pool: if(nace2q1,False, employed_pool)                              
+# Nace 9               
+               - nace9q1p: if(ea and not employed and employed_pool, align(nace9_score, 'align_nace9q1.csv'), False)
+               - nace9q1: if(ea and employed_pool and count(nace9q1)<N9q1,
+                            if(count(nace9q1p)>N9q1-count(nace9q1), align_abs(nace9_score, N9q1-count(nace9q1), leave=nace9q1p==False),align_abs(nace9_score, N9q1-count(nace9q1), take=nace9q1p==True and ea)),nace9q1)
+               - employed: if(nace9q1,True, employed)
+               - employed_pool: if(nace9q1,False, employed_pool)               
+# Nace 3
+               - nace3q1p: if(ea and not employed and employed_pool, align(nace3_score, 'align_nace3q1.csv'), False) 
+               - nace3q1: if(ea and employed_pool and count(nace3q1)<N3q1,
+                            if(count(nace3q1p)>N3q1-count(nace3q1), align_abs(nace3_score, N3q1-count(nace3q1), leave=nace3q1p==False),align_abs(nace3_score, N3q1-count(nace3q1), take=nace3q1p==True and ea)),nace3q1)
+               - employed: if(nace3q1,True, employed) 
+               - employed_pool: if(nace3q1,False, employed_pool)   
+# Nace 6
+               - nace6q1p: if(ea and not employed and employed_pool, align(nace6_score, 'align_nace6q1.csv'), False) 
+               - nace6q1: if(ea and employed_pool and count(nace6q1)<N6q1,
+                            if(count(nace6q1p)>N6q1-count(nace6q1), align_abs(nace6_score, N6q1-count(nace6q1), leave=nace6q1p==False),align_abs(nace6_score, N6q1-count(nace6q1), take=nace6q1p==True and ea)),nace6q1)
+               - employed: if(nace6q1,True, employed)   
+               - employed_pool: if(nace6q1,False, employed_pool)                              
+# Nace 8                
+               - nace8q1p: if(ea and not employed and employed_pool, align(nace8_score, 'align_nace8q1.csv'), False) 
+               - nace8q1: if(ea and employed_pool and count(nace8q1)<N8q1,
+                            if(count(nace8q1p)>N8q1-count(nace8q1), align_abs(nace8_score, N8q1-count(nace8q1), leave=nace8q1p==False),align_abs(nace8_score, N8q1-count(nace8q1), take=nace8q1p==True and ea)),nace8q1)
+               - employed: if(nace8q1,True, employed)      
+               - employed_pool: if(nace8q1,False, employed_pool)
+# Nace 10
+               - nace10q1p: if(ea and not employed and employed_pool, align(nace10_score, 'align_nace10q1.csv'), False) 
+               - nace10q1: if(ea and employed_pool and count(nace10q1)<N10q1,
+                            if(count(nace10q1p)>N10q1-count(nace10q1), align_abs(nace10_score, N10q1-count(nace10q1), leave=nace10q1p==False),align_abs(nace10_score, N10q1-count(nace10q1), take=nace10q1p==True and ea)),nace10q1)
+               - employed: if(nace10q1,True, employed)
+               - employed_pool: if(nace10q1,False, employed_pool)               
+# Nace 1
+               - nace1q1p: if(ea and not employed and employed_pool, align(nace1_score, 'align_nace1q1.csv'), False) 
+               - nace1q1: if(ea and employed_pool and count(nace1q1)<N1q1,
+                            if(count(nace1q1p)>N1q1-count(nace1q1), align_abs(nace1_score, N1q1-count(nace1q1), leave=nace1q1p==False),align_abs(nace1_score, N1q1-count(nace1q1), take=nace1q1p==True and ea)),nace1q1)
+               - employed: if(nace1q1,True, employed)
+               - employed_pool: if(nace1q1,False, employed_pool) 
+# Nace 5               
+               - nace5q1p: if(ea and not employed and employed_pool, align(nace5_score, 'align_nace5q1.csv'), False) 
+               - nace5q1: if(ea and employed_pool and count(nace5q1)<N5q1,
+                            if(count(nace5q1p)>N5q1-count(nace5q1), align_abs(nace5_score, N5q1-count(nace5q1), leave=nace5q1p==False),align_abs(nace5_score, N5q1-count(nace5q1), take=nace5q1p==True and ea)),nace5q1)
+               - employed: if(nace5q1,True, employed)
+               - employed_pool: if(nace5q1,False, employed_pool)
+
+################################### Q2
+# Nace 4
+               - nace4q2p: if(ea and not employed and employed_pool, align(nace4_score, 'align_nace4q2.csv'), False)                          
+               - nace4q2: if(ea and employed_pool and count(nace4q2)<N4q2,
+                            if(count(nace4q2p)>N4q2-count(nace4q2), align_abs(nace4_score, N4q2-count(nace4q2), leave=nace4q2p==False),align_abs(nace4_score, N4q2-count(nace4q2), take=nace4q2p==True and ea)),nace4q2)
+               - employed: if(nace4q2,True, employed)
+               - employed_pool: if(nace4q2,False, employed_pool)  
+# Nace 7
+               - nace7q2p: if(ea and not employed and employed_pool, align(nace7_score, 'align_nace7q2.csv'), False)                         
+               - nace7q2: if(ea and employed_pool and count(nace7q2)<N7q2,
+                            if(count(nace7q2p)>N7q2-count(nace7q2), align_abs(nace7_score, N7q2-count(nace7q2), leave=nace7q2p==False),align_abs(nace7_score, N7q2-count(nace7q2), take=nace7q2p==True and ea)),nace7q2)
+               - employed: if(nace7q2,True, employed)
+               - employed_pool: if(nace7q2,False, employed_pool) 
+# Nace 2               
+               - nace2q2p: if(ea and not employed and employed_pool, align(nace2_score, 'align_nace2q2.csv'), False)                          
+               - nace2q2: if(ea and employed_pool and count(nace2q2)<N2q2,
+                            if(count(nace2q2p)>N2q2-count(nace2q2), align_abs(nace2_score, N2q2-count(nace2q2), leave=nace2q2p==False),align_abs(nace2_score, N2q2-count(nace2q2), take=nace2q2p==True and ea)),nace2q2)
+               - employed: if(nace2q2,True, employed)
+               - employed_pool: if(nace2q2,False, employed_pool)               
+# Nace 9
+               - nace9q2p: if(ea and not employed and employed_pool, align(nace9_score, 'align_nace9q2.csv'), False)                            
+               - nace9q2: if(ea and employed_pool and count(nace9q2)<N9q2,
+                            if(count(nace9q2p)>N9q2-count(nace9q2), align_abs(nace9_score, N9q2-count(nace9q2), leave=nace9q2p==False),align_abs(nace9_score, N9q2-count(nace9q2), take=nace9q2p==True and ea)),nace9q2)
+               - employed: if(nace9q2,True, employed)
+               - employed_pool: if(nace9q2,False, employed_pool)               
+# Nace 3
+               - nace3q2p: if(ea and not employed and employed_pool, align(nace3_score, 'align_nace3q2.csv'), False)                          
+               - nace3q2: if(ea and employed_pool and count(nace3q2)<N3q2,
+                            if(count(nace3q2p)>N3q2-count(nace3q2), align_abs(nace3_score, N3q2-count(nace3q2), leave=nace3q2p==False),align_abs(nace3_score, N3q2-count(nace3q2), take=nace3q2p==True and ea)),nace3q2)
+               - employed: if(nace3q2,True, employed)
+               - employed_pool: if(nace3q2,False, employed_pool)   
+# Nace 6
+               - nace6q2p: if(ea and not employed and employed_pool, align(nace6_score, 'align_nace6q2.csv'), False)                           
+               - nace6q2: if(ea and employed_pool and count(nace6q2)<N6q2,
+                            if(count(nace6q2p)>N6q2-count(nace6q2), align_abs(nace6_score, N6q2-count(nace6q2), leave=nace6q2p==False),align_abs(nace6_score, N6q2-count(nace6q2), take=nace6q2p==True and ea)),nace6q2)
+               - employed: if(nace6q2,True, employed)
+               - employed_pool: if(nace6q2,False, employed_pool)               
+# Nace 8
+               - nace8q2p: if(ea and not employed and employed_pool, align(nace8_score, 'align_nace8q2.csv'), False)                           
+               - nace8q2: if(ea and employed_pool and count(nace8q2)<N8q2,
+                            if(count(nace8q2p)>N8q2-count(nace8q2), align_abs(nace8_score, N8q2-count(nace8q2), leave=nace8q2p==False),align_abs(nace8_score, N8q2-count(nace8q2), take=nace8q2p==True and ea)),nace8q2)
+               - employed: if(nace8q2,True, employed) 
+               - employed_pool: if(nace8q2,False, employed_pool)               
+# Nace 10
+               - nace10q2p: if(ea and not employed and employed_pool, align(nace10_score, 'align_nace10q2.csv'), False)                          
+               - nace10q2: if(ea and employed_pool and count(nace10q2)<N10q2,
+                            if(count(nace10q2p)>N10q2-count(nace10q2), align_abs(nace10_score, N10q2-count(nace10q2), leave=nace10q2p==False),align_abs(nace10_score, N10q2-count(nace10q2), take=nace10q2p==True and ea)),nace10q2)
+               - employed: if(nace10q2,True, employed)
+               - employed_pool: if(nace10q2,False, employed_pool)               
+# Nace 1
+               - nace1q2p: if(ea and not employed and employed_pool, align(nace1_score, 'align_nace1q2.csv'), False)                          
+               - nace1q2: if(ea and employed_pool and count(nace1q2)<N1q2,
+                            if(count(nace1q2p)>N1q2-count(nace1q2), align_abs(nace1_score, N1q2-count(nace1q2), leave=nace1q2p==False),align_abs(nace1_score, N1q2-count(nace1q2), take=nace1q2p==True and ea)),nace1q2)
+               - employed: if(nace1q2,True, employed)
+               - employed_pool: if(nace1q2,False, employed_pool)
+# Nace 5               
+               - nace5q2p: if(ea and not employed and employed_pool, align(nace5_score, 'align_nace5q2.csv'), False)                          
+               - nace5q2: if(ea and employed_pool and count(nace5q2)<N5q2,
+                            if(count(nace5q2p)>N5q2-count(nace5q2), align_abs(nace5_score, N5q2-count(nace5q2), leave=nace5q2p==False),align_abs(nace5_score, N5q2-count(nace5q2), take=nace5q2p==True and ea)),nace5q2)
+               - employed: if(nace5q2,True, employed)
+               - employed_pool: if(nace5q2,False, employed_pool)
+
+################################### Q3               
+# Nace 4               
+               - nace4q3p: if(ea and not employed and employed_pool, align(nace4_score, 'align_nace4q3.csv'), False) 
+               - nace4q3: if(ea and employed_pool and count(nace4q3)<N4q3,
+                            if(count(nace4q3p)>N4q3-count(nace4q3), align_abs(nace4_score, N4q3-count(nace4q3), leave=nace4q3p==False),align_abs(nace4_score, N4q3-count(nace4q3), take=nace4q3p==True and ea)),nace4q3)
+               - employed: if(nace4q3,True, employed)
+               - employed_pool: if(nace4q3,False, employed_pool) 
+# NACE 7                
+               - nace7q3p: if(ea and not employed and employed_pool, align(nace7_score, 'align_nace7q3.csv'), False)           
+               - nace7q3: if(ea and employed_pool and count(nace7q3)<N7q3,
+                            if(count(nace7q3p)>N7q3-count(nace7q3), align_abs(nace7_score, N7q3-count(nace7q3), leave=nace7q3p==False),align_abs(nace7_score, N7q3-count(nace7q3), take=nace7q3p==True and ea)),nace7q3)
+               - employed: if(nace7q3,True, employed)  
+               - employed_pool: if(nace7q3,False, employed_pool) 
+# NACE 2
+               - nace2q3p: if(ea and not employed and employed_pool, align(nace2_score, 'align_nace2q3.csv'), False)            
+               - nace2q3: if(ea and employed_pool and count(nace2q3)<N2q3,
+                            if(count(nace2q3p)>N2q3-count(nace2q3), align_abs(nace2_score, N2q3-count(nace2q3), leave=nace2q3p==False),align_abs(nace2_score, N2q3-count(nace2q3), take=nace2q3p==True and ea)),nace2q3)
+               - employed: if(nace2q3,True, employed)
+               - employed_pool: if(nace2q3,False, employed_pool)   
+# NACE 9
+               - nace9q3p: if(ea and not employed and employed_pool, align(nace9_score, 'align_nace9q3.csv'), False)             
+               - nace9q3: if(ea and employed_pool and count(nace9q3)<N9q3,
+                            if(count(nace9q3p)>N9q3-count(nace9q3), align_abs(nace9_score, N9q3-count(nace9q3), leave=nace9q3p==False),align_abs(nace9_score, N9q3-count(nace9q3), take=nace9q3p==True and ea)),nace9q3)
+               - employed: if(nace9q3,True, employed)
+               - employed_pool: if(nace9q3,False, employed_pool)  
+# NACE 3                
+               - nace3q3p: if(ea and not employed and employed_pool, align(nace3_score, 'align_nace3q3.csv'), False)           
+               - nace3q3: if(ea and employed_pool and count(nace3q3)<N3q3,
+                            if(count(nace3q3p)>N3q3-count(nace3q3), align_abs(nace3_score, N3q3-count(nace3q3), leave=nace3q3p==False),align_abs(nace3_score, N3q3-count(nace3q3), take=nace3q3p==True and ea)),nace3q3)
+               - employed: if(nace3q3,True, employed)
+               - employed_pool: if(nace3q3,False, employed_pool)   
+# NACE 6
+               - nace6q3p: if(ea and not employed and employed_pool, align(nace6_score, 'align_nace6q3.csv'), False)             
+               - nace6q3: if(ea and employed_pool and count(nace6q3)<N6q3,
+                            if(count(nace6q3p)>N6q3-count(nace6q3), align_abs(nace6_score, N6q3-count(nace6q3), leave=nace6q3p==False),align_abs(nace6_score, N6q3-count(nace6q3), take=nace6q3p==True and ea)),nace6q3)
+               - employed: if(nace6q3,True, employed)
+               - employed_pool: if(nace6q3,False, employed_pool) 
+# Nace 8                
+               - nace8q3p: if(ea and not employed and employed_pool, align(nace8_score, 'align_nace8q3.csv'), False)               
+               - nace8q3: if(ea and employed_pool and count(nace8q3)<N8q3,
+                            if(count(nace8q3p)>N8q3-count(nace8q3), align_abs(nace8_score, N8q3-count(nace8q3), leave=nace8q3p==False),align_abs(nace8_score, N8q3-count(nace8q3), take=nace8q3p==True and ea)),nace8q3)
+               - employed: if(nace8q3,True, employed)  
+               - employed_pool: if(nace8q3,False, employed_pool) 
+# Nace 10
+               - nace10q3p: if(ea and not employed and employed_pool, align(nace10_score, 'align_nace10q3.csv'), False)        
+               - nace10q3: if(ea and employed_pool and count(nace10q3)<N10q3,
+                            if(count(nace10q3p)>N10q3-count(nace10q3), align_abs(nace10_score, N10q3-count(nace10q3), leave=nace10q3p==False),align_abs(nace10_score, N10q3-count(nace10q3), take=nace10q3p==True and ea)),nace10q3)
+               - employed: if(nace10q3,True, employed) 
+               - employed_pool: if(nace10q3,False, employed_pool)
+# NACE 1
+               - nace1q3p: if(ea and not employed and employed_pool, align(nace1_score, 'align_nace1q3.csv'), False)           
+               - nace1q3: if(ea and employed_pool and count(nace1q3)<N1q3,
+                            if(count(nace1q3p)>N1q3-count(nace1q3), align_abs(nace1_score, N1q3-count(nace1q3), leave=nace1q3p==False),align_abs(nace1_score, N1q3-count(nace1q3), take=nace1q3p==True and ea)),nace1q3)
+               - employed: if(nace1q3,True, employed)
+               - employed_pool: if(nace1q3,False, employed_pool) 
+# Nace 5
+               - nace5q3p: if(ea and not employed and employed_pool, align(nace5_score, 'align_nace5q3.csv'), False)            
+               - nace5q3: if(ea and employed_pool and count(nace5q3)<N5q3,
+                            if(count(nace5q3p)>N5q3-count(nace5q3), align_abs(nace5_score, N5q3-count(nace5q3), leave=nace5q3p==False),align_abs(nace5_score, N5q3-count(nace5q3), take=nace5q3p==True and ea)),nace5q3)
+               - employed: if(nace5q3,True, employed) 
+               - employed_pool: if(nace5q3,False, employed_pool)               
+
+################################### Q4               
+# Nace 4               
+               - nace4q4p: if(ea and not employed and employed_pool, align(nace4_score, 'align_nace4q4.csv'), False) 
+               - nace4q4: if(ea and employed_pool and count(nace4q4)<N4q4,
+                            if(count(nace4q4p)>N4q4-count(nace4q4), align_abs(nace4_score, N4q4-count(nace4q4), leave=nace4q4p==False),align_abs(nace4_score, N4q4-count(nace4q4), take=nace4q4p==True and ea)),nace4q4)
+               - employed: if(nace4q4,True, employed)
+               - employed_pool: if(nace4q4,False, employed_pool) 
+# NACE 7                
+               - nace7q4p: if(ea and not employed and employed_pool, align(nace7_score, 'align_nace7q4.csv'), False)           
+               - nace7q4: if(ea and employed_pool and count(nace7q4)<N7q4,
+                            if(count(nace7q4p)>N7q4-count(nace7q4), align_abs(nace7_score, N7q4-count(nace7q4), leave=nace7q4p==False),align_abs(nace7_score, N7q4-count(nace7q4), take=nace7q4p==True and ea)),nace7q4)
+               - employed: if(nace7q4,True, employed)  
+               - employed_pool: if(nace7q4,False, employed_pool) 
+# NACE 2
+               - nace2q4p: if(ea and not employed and employed_pool, align(nace2_score, 'align_nace2q4.csv'), False)            
+               - nace2q4: if(ea and employed_pool and count(nace2q4)<N2q4,
+                            if(count(nace2q4p)>N2q4-count(nace2q4), align_abs(nace2_score, N2q4-count(nace2q4), leave=nace2q4p==False),align_abs(nace2_score, N2q4-count(nace2q4), take=nace2q4p==True and ea)),nace2q4)
+               - employed: if(nace2q4,True, employed)
+               - employed_pool: if(nace2q4,False, employed_pool)   
+# NACE 9
+               - nace9q4p: if(ea and not employed and employed_pool, align(nace9_score, 'align_nace9q4.csv'), False)             
+               - nace9q4: if(ea and employed_pool and count(nace9q4)<N9q4,
+                            if(count(nace9q4p)>N9q4-count(nace9q4), align_abs(nace9_score, N9q4-count(nace9q4), leave=nace9q4p==False),align_abs(nace9_score, N9q4-count(nace9q4), take=nace9q4p==True and ea)),nace9q4)
+               - employed: if(nace9q4,True, employed)
+               - employed_pool: if(nace9q4,False, employed_pool)  
+# NACE 3                
+               - nace3q4p: if(ea and not employed and employed_pool, align(nace3_score, 'align_nace3q4.csv'), False)           
+               - nace3q4: if(ea and employed_pool and count(nace3q4)<N3q4,
+                            if(count(nace3q4p)>N3q4-count(nace3q4), align_abs(nace3_score, N3q4-count(nace3q4), leave=nace3q4p==False),align_abs(nace3_score, N3q4-count(nace3q4), take=nace3q4p==True and ea)),nace3q4)
+               - employed: if(nace3q4,True, employed)
+               - employed_pool: if(nace3q4,False, employed_pool)   
+# NACE 6
+               - nace6q4p: if(ea and not employed and employed_pool, align(nace6_score, 'align_nace6q4.csv'), False)             
+               - nace6q4: if(ea and employed_pool and count(nace6q4)<N6q4,
+                            if(count(nace6q4p)>N6q4-count(nace6q4), align_abs(nace6_score, N6q4-count(nace6q4), leave=nace6q4p==False),align_abs(nace6_score, N6q4-count(nace6q4), take=nace6q4p==True and ea)),nace6q4)
+               - employed: if(nace6q4,True, employed)
+               - employed_pool: if(nace6q4,False, employed_pool) 
+# Nace 8                
+               - nace8q4p: if(ea and not employed and employed_pool, align(nace8_score, 'align_nace8q4.csv'), False)               
+               - nace8q4: if(ea and employed_pool and count(nace8q4)<N8q4,
+                            if(count(nace8q4p)>N8q4-count(nace8q4), align_abs(nace8_score, N8q4-count(nace8q4), leave=nace8q4p==False),align_abs(nace8_score, N8q4-count(nace8q4), take=nace8q4p==True and ea)),nace8q4)
+               - employed: if(nace8q4,True, employed)  
+               - employed_pool: if(nace8q4,False, employed_pool) 
+# Nace 10
+               - nace10q4p: if(ea and not employed and employed_pool, align(nace10_score, 'align_nace10q4.csv'), False)        
+               - nace10q4: if(ea and employed_pool and count(nace10q4)<N10q4,
+                            if(count(nace10q4p)>N10q4-count(nace10q4), align_abs(nace10_score, N10q4-count(nace10q4), leave=nace10q4p==False),align_abs(nace10_score, N10q4-count(nace10q4), take=nace10q4p==True and ea)),nace10q4)
+               - employed: if(nace10q4,True, employed) 
+               - employed_pool: if(nace10q4,False, employed_pool)
+# NACE 1
+               - nace1q4p: if(ea and not employed and employed_pool, align(nace1_score, 'align_nace1q4.csv'), False)           
+               - nace1q4: if(ea and employed_pool and count(nace1q4)<N1q4,
+                            if(count(nace1q4p)>N1q4-count(nace1q4), align_abs(nace1_score, N1q4-count(nace1q4), leave=nace1q4p==False),align_abs(nace1_score, N1q4-count(nace1q4), take=nace1q4p==True and ea)),nace1q4)
+               - employed: if(nace1q4,True, employed)
+               - employed_pool: if(nace1q4,False, employed_pool) 
+# Nace 5
+               - nace5q4p: if(ea and not employed and employed_pool, align(nace5_score, 'align_nace5q4.csv'), False)            
+               - nace5q4: if(ea and employed_pool and count(nace5q4)<N5q4,
+                            if(count(nace5q4p)>N5q4-count(nace5q4), align_abs(nace5_score, N5q4-count(nace5q4), leave=nace5q4p==False),align_abs(nace5_score, N5q4-count(nace5q4), take=nace5q4p==True and ea)),nace5q4)
+               - employed: if(nace5q4,True, employed) 
+               - employed_pool: if(nace5q4,False, employed_pool)                   
+
+            employment_nace_immigrants():               
+###########################  immigrants   
+          
+               - immigrant_sim: False
+               - immigrant_sim2: False
+########################## Q1  
+
+# NACE 5       
+               - immigrant_sim2: False        
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace5q1, 2, 0)
+               - to_immigrate: if(ea and employed and count(nace5q1)<N5q1, align_abs(immigrant_score, N5q1-count(nace5q1)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace5q1: if(nace5q1 or immigrant_sim2, True, nace5q1)              
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)       
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N5q1),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N5q1),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N5q1),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 8       
+               - immigrant_sim2: False                     
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace8q1, 2, 0)
+               - to_immigrate: if(ea and count(nace8q1)<N8q1, align_abs(immigrant_score, N8q1-count(nace8q1)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace8q1: if(nace8q1 or immigrant_sim2, True, nace8q1)  
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N8q1),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N8q1),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N8q1),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 9 
+               - immigrant_sim2: False                                   
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace9q1, 2, 0)
+               - to_immigrate: if(ea and count(nace9q1)<N9q1, align_abs(immigrant_score, N9q1-count(nace9q1)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace9q1: if(nace9q1 or immigrant_sim2, True, nace9q1)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)   
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N9q1),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N9q1),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N9q1),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 6
+               - immigrant_sim2: False                     
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace6q1, 2, 0)
+               - to_immigrate: if(ea and count(nace6q1)<N6q1, align_abs(immigrant_score, N6q1-count(nace6q1)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace6q1: if(nace6q1 or immigrant_sim2, True, nace6q1)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new) 
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N6q1),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N6q1),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N6q1),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 2
+               - immigrant_sim2: False                     
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace2q1, 2, 0)
+               - to_immigrate: if(ea and count(nace2q1)<N2q1, align_abs(immigrant_score, N2q1-count(nace2q1)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace2q1: if(nace2q1 or immigrant_sim2, True, nace2q1)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new) 
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N2q1),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N2q1),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N2q1),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 7
+               - immigrant_sim2: False                     
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace7q1, 2, 0)
+               - to_immigrate: if(ea and count(nace7q1)<N7q1, align_abs(immigrant_score, N7q1-count(nace7q1)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace7q1: if(nace7q1 or immigrant_sim2, True, nace7q1)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)  
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N7q1),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N7q1),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N7q1),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 3
+               - immigrant_sim2: False                     
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace3q1, 2, 0)
+               - to_immigrate: if(ea and count(nace3q1)<N3q1, align_abs(immigrant_score, N3q1-count(nace3q1)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace3q1: if(nace3q1 or immigrant_sim2, True, nace3q1)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N3q1),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N3q1),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N3q1),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 1
+               - immigrant_sim2: False                     
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace1q1, 2, 0)
+               - to_immigrate: if(ea and count(nace1q1)<N1q1, align_abs(immigrant_score, N1q1-count(nace1q1)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace1q1: if(nace1q1 or immigrant_sim2, True, nace1q1)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)    
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N1q1),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N1q1),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N1q1),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 4
+               - immigrant_sim2: False                     
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace4q1, 2, 0)
+               - to_immigrate: if(ea and count(nace4q1)<N4q1, align_abs(immigrant_score, N4q1-count(nace4q1)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace4q1: if(nace4q1 or immigrant_sim2, True, nace4q1)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new) 
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N4q1),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N4q1),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N4q1),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 10    
+               - immigrant_sim2: False                               
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace10q1, 2, 0)
+               - to_immigrate: if(ea and count(nace10q1)<N10q1, align_abs(immigrant_score, N10q1-count(nace10q1), leave=country_b==1),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace10q1: if(nace10q1 or immigrant_sim2, True, nace10q1)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)  
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N10q1),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N10q1),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N10q1),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+
+########################## Q2  
+# NACE 5       
+               - immigrant_sim2: False           
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace5q2, 2, 0)
+               - to_immigrate: if(ea and employed and count(nace5q2)<N5q2, align_abs(immigrant_score, N5q2-count(nace5q2)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace5q2: if(nace5q2 or immigrant_sim2, True, nace5q2)              
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)       
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N5q2),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N5q2),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N5q2),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 8        
+               - immigrant_sim2: False                     
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace8q2, 2, 0)
+               - to_immigrate: if(ea and count(nace8q2)<N8q2, align_abs(immigrant_score, N8q2-count(nace8q2)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace8q2: if(nace8q2 or immigrant_sim2, True, nace8q2)  
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N8q2),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N8q2),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N8q2),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 9 
+               - immigrant_sim2: False               
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace9q2, 2, 0)
+               - to_immigrate: if(ea and count(nace9q2)<N9q2, align_abs(immigrant_score, N9q2-count(nace9q2)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace9q2: if(nace9q2 or immigrant_sim2, True, nace9q2)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)     
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N9q2),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N9q2),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N9q2),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 6
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace6q2, 2, 0)
+               - to_immigrate: if(ea and count(nace6q2)<N6q2, align_abs(immigrant_score, N6q2-count(nace6q2)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace6q2: if(nace6q2 or immigrant_sim2, True, nace6q2)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new) 
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N6q2),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N6q2),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N6q2),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 2
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace2q2, 2, 0)
+               - to_immigrate: if(ea and count(nace2q2)<N2q2, align_abs(immigrant_score, N2q2-count(nace2q2)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace2q2: if(nace2q2 or immigrant_sim2, True, nace2q2)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new) 
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N2q2),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N2q2),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N2q2),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 7
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace7q2, 2, 0)
+               - to_immigrate: if(ea and count(nace7q2)<N7q2, align_abs(immigrant_score, N7q2-count(nace7q2)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace7q2: if(nace7q2 or immigrant_sim2, True, nace7q2)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)  
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N7q2),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N7q2),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N7q2),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 3
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace3q2, 2, 0)
+               - to_immigrate: if(ea and count(nace3q2)<N3q2, align_abs(immigrant_score, N3q2-count(nace3q2)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace3q2: if(nace3q2 or immigrant_sim2, True, nace3q2)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N3q2),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N3q2),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N3q2),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 1
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace1q2, 2, 0)
+               - to_immigrate: if(ea and count(nace1q2)<N1q2, align_abs(immigrant_score, N1q2-count(nace1q2)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace1q2: if(nace1q2 or immigrant_sim2, True, nace1q2)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)      
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N1q2),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N1q2),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N1q2),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 4
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace4q2, 2, 0)
+               - to_immigrate: if(ea and count(nace4q2)<N4q2, align_abs(immigrant_score, N4q2-count(nace4q2)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace4q2: if(nace4q2 or immigrant_sim2, True, nace4q2)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new) 
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N4q2),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N4q2),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N4q2),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 10 
+               - immigrant_sim2: False              
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace10q2, 2, 0)
+               - to_immigrate: if(ea and count(nace10q2)<N10q2, align_abs(immigrant_score, N10q2-count(nace10q2), leave=country_b==1),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace10q2: if(nace10q2 or immigrant_sim2, True, nace10q2)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)    
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N10q2),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N10q2),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N10q2),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+              
+########################## Q3  
+# NACE 5    
+               - immigrant_sim2: False              
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace5q3, 2, 0)
+               - to_immigrate: if(ea and employed and count(nace5q3)<N5q3, align_abs(immigrant_score, N5q3-count(nace5q3)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace5q3: if(nace5q3 or immigrant_sim2, True, nace5q3)              
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)               
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N5q3),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N5q3),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N5q3),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 8  
+               - immigrant_sim2: False                           
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace8q3, 2, 0)
+               - to_immigrate: if(ea and count(nace8q3)<N8q3, align_abs(immigrant_score, N8q3-count(nace8q3)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace8q3: if(nace8q3 or immigrant_sim2, True, nace8q3)  
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N8q3),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N8q3),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N8q3),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 9   
+               - immigrant_sim2: False             
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace9q3, 2, 0)
+               - to_immigrate: if(ea and count(nace9q3)<N9q3, align_abs(immigrant_score, N9q3-count(nace9q3)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace9q3: if(nace9q3 or immigrant_sim2, True, nace9q3)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)               
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N9q3),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N9q3),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N9q3),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 6
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace6q3, 2, 0)
+               - to_immigrate: if(ea and count(nace6q3)<N6q3, align_abs(immigrant_score, N6q3-count(nace6q3)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace6q3: if(nace6q3 or immigrant_sim2, True, nace6q3)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new) 
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N6q3),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N6q3),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N6q3),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 2
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace2q3, 2, 0)
+               - to_immigrate: if(ea and count(nace2q3)<N2q3, align_abs(immigrant_score, N2q3-count(nace2q3)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace2q3: if(nace2q3 or immigrant_sim2, True, nace2q3)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new) 
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N2q3),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N2q3),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N2q3),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 7
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace7q3, 2, 0)
+               - to_immigrate: if(ea and count(nace7q3)<N7q3, align_abs(immigrant_score, N7q3-count(nace7q3)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace7q3: if(nace7q3 or immigrant_sim2, True, nace7q3)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)  
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N7q3),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N7q3),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N7q3),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 3
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace3q3, 2, 0)
+               - to_immigrate: if(ea and count(nace3q3)<N3q3, align_abs(immigrant_score, N3q3-count(nace3q3)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace3q3: if(nace3q3 or immigrant_sim2, True, nace3q3)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N3q3),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N3q3),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N3q3),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 1
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace1q3, 2, 0)
+               - to_immigrate: if(ea and count(nace1q3)<N1q3, align_abs(immigrant_score, N1q3-count(nace1q3)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace1q3: if(nace1q3 or immigrant_sim2, True, nace1q3)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)      
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N1q3),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N1q3),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N1q3),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 4
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace4q3, 2, 0)
+               - to_immigrate: if(ea and count(nace4q3)<N4q3, align_abs(immigrant_score, N4q3-count(nace4q3)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace4q3: if(nace4q3 or immigrant_sim2, True, nace4q3)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new) 
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N4q3),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N4q3),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N4q3),False)
+               - country_b: if(country_p, WORLD,country_b)     
+
+# NACE 10  
+               - immigrant_sim2: False             
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace10q3, 2, 0)
+               - to_immigrate: if(ea and count(nace10q3)<N10q3, align_abs(immigrant_score, N10q3-count(nace10q3), leave=country_b==1),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace10q3: if(nace10q3 or immigrant_sim2, True, nace10q3)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)     
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N10q3),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N10q3),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N10q3),False)
+               - country_b: if(country_p, WORLD,country_b)     
+              
+                
+########################## Q4  
+# NACE 5    
+               - immigrant_sim2: False              
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace5q4, 2, 0)
+               - to_immigrate: if(ea and employed and count(nace5q4)<N5q4, align_abs(immigrant_score, N5q4-count(nace5q4)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace5q4: if(nace5q4 or immigrant_sim2, True, nace5q4)              
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)               
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N5q4),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N5q4),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N5q4),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 8  
+               - immigrant_sim2: False                           
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace8q4, 2, 0)
+               - to_immigrate: if(ea and count(nace8q4)<N8q4, align_abs(immigrant_score, N8q4-count(nace8q4)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace8q4: if(nace8q4 or immigrant_sim2, True, nace8q4)  
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N8q4),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N8q4),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N8q4),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 9   
+               - immigrant_sim2: False             
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace9q4, 2, 0)
+               - to_immigrate: if(ea and count(nace9q4)<N9q4, align_abs(immigrant_score, N9q4-count(nace9q4)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace9q4: if(nace9q4 or immigrant_sim2, True, nace9q4)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)               
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N9q4),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N9q4),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N9q4),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 6
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace6q4, 2, 0)
+               - to_immigrate: if(ea and count(nace6q4)<N6q4, align_abs(immigrant_score, N6q4-count(nace6q4)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace6q4: if(nace6q4 or immigrant_sim2, True, nace6q4)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new) 
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N6q4),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N6q4),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N6q4),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 2
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace2q4, 2, 0)
+               - to_immigrate: if(ea and count(nace2q4)<N2q4, align_abs(immigrant_score, N2q4-count(nace2q4)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace2q4: if(nace2q4 or immigrant_sim2, True, nace2q4)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new) 
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N2q4),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N2q4),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N2q4),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 7
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace7q4, 2, 0)
+               - to_immigrate: if(ea and count(nace7q4)<N7q4, align_abs(immigrant_score, N7q4-count(nace7q4)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace7q4: if(nace7q4 or immigrant_sim2, True, nace7q4)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)  
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N7q4),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N7q4),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N7q4),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 3
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace3q4, 2, 0)
+               - to_immigrate: if(ea and count(nace3q4)<N3q4, align_abs(immigrant_score, N3q4-count(nace3q4)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace3q4: if(nace3q4 or immigrant_sim2, True, nace3q4)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N3q4),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N3q4),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N3q4),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 1
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace1q4, 2, 0)
+               - to_immigrate: if(ea and count(nace1q4)<N1q4, align_abs(immigrant_score, N1q4-count(nace1q4)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace1q4: if(nace1q4 or immigrant_sim2, True, nace1q4)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)      
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N1q4),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N1q4),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N1q4),False)
+               - country_b: if(country_p, WORLD,country_b)     
+               
+# NACE 4
+               - immigrant_sim2: False 
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace4q4, 2, 0)
+               - to_immigrate: if(ea and count(nace4q4)<N4q4, align_abs(immigrant_score, N4q4-count(nace4q4)),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace4q4: if(nace4q4 or immigrant_sim2, True, nace4q4)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new) 
+               
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N4q4),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N4q4),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N4q4),False)
+               - country_b: if(country_p, WORLD,country_b)     
+
+# NACE 10  
+               - immigrant_sim2: False             
+               - to_immigrate: False
+               - immigrant_score: if(country_b!=1 and toret<0 and nace10q4, 2, 0)
+               - to_immigrate: if(ea and count(nace10q4)<N10q4, align_abs(immigrant_score, N10q4-count(nace10q4), leave=country_b==1),False) 
+               - clone(filter=to_immigrate, immigrant_sim=True, immigrant_sim2=True, country_b=choice([5],[1]))
+               - immigrant: if(immigrant_sim, True, immigrant)
+               - employed: if(immigrant_sim2,True,employed)
+               - nace10q4: if(nace10q4 or immigrant_sim2, True, nace10q4)
+               - immigrant_new: if(immigrant_sim, True, immigrant_new)     
+
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_2_N10q4),False)
+               - country_b: if(country_p, CZECH,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_3_N10q4),False)
+               - country_b: if(country_p, EU,country_b)     
+               - country_p: False    
+               - country_p: if(country_b==5, align_abs(0.0, count(immigrant_sim2)*cou_4_N10q4),False)
+               - country_b: if(country_p, WORLD,country_b)     
+             
+
+            immigrants_family():             
+## Making other members of the immigrant_new               
+## COUNTRYB	Employed	Unemployed      Student 	    Retired	        Disabled	    Inactive	    Total
+##  Slovak	1	        0.086604813	    0.488175585	    0.4121054	    0.058135861	    0.102832035	    1.147853694
+##  Czech	1	        0.985957874	    1.420260782	    9.23671013	    0.941825476	    0.442326981	    13.02708124
+##  EU	    1	        0.037745345	    0.036235531	    1.22521389	    0	            0.126572723	    1.425767489
+##  WORLD   1	        0.056804931	    0.091620856	    0.031817425	    0	            0.110278194	    0.290521406
+
+# Student               
+               - immigrant_fam_p: False 
+               - to_immigrate: False
+               - to_immigrate: if(immigrant_sim and employed and country_b==2, align_abs(0.0, round(count(immigrant_sim and country_b==2) * 1.420260782)),False) 
+               - clone(filter=to_immigrate, immigrant_fam_p=True, ageg=choice([1, 2], [0.902205882, 0.097794118]))
+               - to_immigrate: False
+               - to_immigrate: if(immigrant_sim and employed and country_b==3, align_abs(0.0, round(count(immigrant_sim and country_b==3) * 0.036235531)),False) 
+               - clone(filter=to_immigrate, immigrant_fam_p=True, ageg=choice([1, 2], [0.947075209, 0.052924791]))
+               - to_immigrate: False
+               - to_immigrate: if(immigrant_sim and employed and country_b==4, align_abs(0.0, round(count(immigrant_sim and country_b==4) * 0.091620856)),False) 
+               - clone(filter=to_immigrate, immigrant_fam_p=True, ageg=choice([1, 2], [0.427083333, 0.572916667]))
+               - immigrant_fam: if(immigrant_fam_p, True, immigrant_fam)
+               - status: if(immigrant_fam_p, 3, status)
+               - employed: if(immigrant_fam_p, False, employed)
+               - ea: if(immigrant_fam_p, False, ea)
+               - age:
+                    if(immigrant_fam_p and status==3,
+                     if(ageg==1, 
+                       choice([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], 
+                       [0.069358555, 0.067799454, 0.067117497, 0.06683424, 0.067613791, 0.073171806, 0.069157419, 0.071214004, 0.067863723, 0.064791937, 0.064158776, 0.06481336, 0.064214713, 0.061428565, 0.06046216]),              
+                       choice([15, 16, 17, 18, 19],
+                       [0.18550948, 0.197905341, 0.201253627, 0.20455511, 0.210776442])), age)
+
+# Retired               
+               - immigrant_fam_p: False 
+               - to_immigrate: False
+# Upraveny dochodca pre CZ               
+               - to_immigrate: if(immigrant_sim and employed and country_b==2, align_abs(0.0, round(count(immigrant_sim and employed and country_b==2) * 1.23671013)),False) 
+               - clone(filter=to_immigrate, immigrant_fam_p=True, ageg=choice([12, 13, 14], [0.542489665, 0.291685806, 0.165824529]))
+               - to_immigrate: False
+               - to_immigrate: if(immigrant_sim and employed and country_b==3, align_abs(0.0, round(count(immigrant_sim and employed and country_b==3) * 1.22521389)),False) 
+               - clone(filter=to_immigrate, immigrant_fam_p=True, ageg=choice([12, 13, 14], [0.206472492, 0.218338727, 0.575188781]))
+               - to_immigrate: False
+               - to_immigrate: if(immigrant_sim and employed and country_b==4, align_abs(0.0, round(count(immigrant_sim and employed and country_b==4) * 0.031817425)),False) 
+               - clone(filter=to_immigrate, immigrant_fam_p=True, ageg=choice([12, 13, 14], [0.356756757, 0.19009009, 0.453153153]))
+               - immigrant_fam: if(immigrant_fam_p, True, immigrant_fam)
+               - status: if(immigrant_fam_p, 4, status)
+               - employed: if(immigrant_fam_p, False, employed)
+               - ea: if(immigrant_fam_p, False, ea)
+               - age:
+                    if(immigrant_fam_p and status==4,
+                    if(ageg==12,
+                      choice([65, 66, 67, 68, 69],
+                      [0.229217138, 0.214725163, 0.194134665, 0.186648433, 0.175274602]),
+                    if(ageg==13,
+                      choice([70, 71, 72, 73, 74],
+                      [0.223068166, 0.202906138, 0.205792962, 0.1871455, 0.181087235]),
+                      choice([75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
+                      [0.107107746, 0.101641213, 0.090986794, 0.082852742, 0.07563604, 0.070376145, 0.066650386, 0.060228931, 0.055639046, 0.052326564, 0.045714125, 0.039565057, 0.032971402, 0.027000795, 0.022028942, 0.017761539, 0.014161015, 0.011305644, 0.008531675, 0.006480942, 0.00457423, 0.002902335, 0.00200377, 0.000829686, 0.000723236]))),age)
+# Disabled
+               - immigrant_fam_p: False 
+               - to_immigrate: False
+               - to_immigrate: if(immigrant_sim and employed and country_b==2 and age>24 and age<62, align_abs(0.0, round(count(immigrant_sim and country_b==2) * 0.941825476)),False) 
+               - clone(filter=to_immigrate, immigrant_fam_p=True)
+               - to_immigrate: False
+               - to_immigrate: if(immigrant_sim and employed and country_b==3 and age>24 and age<62, align_abs(0.0, round(count(immigrant_sim and country_b==3) * 0.0)),False) 
+               - clone(filter=to_immigrate, immigrant_fam_p=True)
+               - to_immigrate: False
+               - to_immigrate: if(immigrant_sim and employed and country_b==4 and age>24 and age<62, align_abs(0.0, round(count(immigrant_sim and country_b==4) * 0.0)),False) 
+               - clone(filter=to_immigrate, immigrant_fam_p=True)
+               - immigrant_fam: if(immigrant_fam_p, True, immigrant_fam)
+               - status: if(immigrant_fam_p, 5, status) 
+               - employed: if(immigrant_fam_p, False, employed)
+               - ea: if(immigrant_fam_p, False, ea)               
+# Inactive
+               - immigrant_fam_p: False 
+               - to_immigrate: False
+               - to_immigrate: if(immigrant_sim and employed and country_b==2 and age>24 and age<62, align_abs(0.0, round(count(immigrant_sim and employed and country_b==2 ) * 0.442326981)),False) 
+               - clone(filter=to_immigrate, immigrant_fam_p=True)
+               - to_immigrate: False
+               - to_immigrate: if(immigrant_sim and employed and country_b==3 and age>24 and age<62, align_abs(0.0, round(count(immigrant_sim and employed and country_b==3) * 0.126572723)),False) 
+               - clone(filter=to_immigrate, immigrant_fam_p=True)
+               - to_immigrate: False
+               - to_immigrate: if(immigrant_sim and employed and country_b==4 and age>24 and age<62, align_abs(0.0, round(count(immigrant_sim and employed and country_b==4) * 0.110278194)),False) 
+               - clone(filter=to_immigrate, immigrant_fam_p=True)
+               - immigrant_fam: if(immigrant_fam_p, True, immigrant_fam)
+               - status: if(immigrant_fam_p, 6, status)  
+               - employed: if(immigrant_fam_p, False, employed)               
+               - ea: if(immigrant_fam_p, False, ea)                  
+
+                    
+              
+            employment_nace_qual():              
+              
+               - nace: -1
+               - qual: -1
+
+ 
+               - nace: if(nace1q1 or nace1q2 or nace1q3 or nace1q4, 1, nace)
+               - nace: if(nace2q1 or nace2q2 or nace2q3 or nace2q4, 2, nace)
+               - nace: if(nace3q1 or nace3q2 or nace3q3 or nace3q4, 3, nace)
+               - nace: if(nace4q1 or nace4q2 or nace4q3 or nace4q4, 4, nace)
+               - nace: if(nace5q1 or nace5q2 or nace5q3 or nace5q4, 5, nace)
+               - nace: if(nace6q1 or nace6q2 or nace6q3 or nace6q4, 6, nace)
+               - nace: if(nace7q1 or nace7q2 or nace7q3 or nace7q4, 7, nace)
+               - nace: if(nace8q1 or nace8q2 or nace8q3 or nace8q4, 8, nace)
+               - nace: if(nace9q1 or nace9q2 or nace9q3 or nace9q4, 9, nace)
+               - nace: if(nace10q1 or nace10q2 or nace10q3 or nace10q4, 10, nace)
+                            
+                    
+               - qual: if(nace1q1 or nace2q1 or nace3q1 or nace4q1 or nace5q1 or nace6q1 or nace7q1 or nace8q1 or nace9q1 or nace10q1, 1, qual)
+               - qual: if(nace1q2 or nace2q2 or nace3q2 or nace4q2 or nace5q2 or nace6q2 or nace7q2 or nace8q2 or nace9q2 or nace10q2, 2, qual)
+               - qual: if(nace1q3 or nace2q3 or nace3q3 or nace4q3 or nace5q3 or nace6q3 or nace7q3 or nace8q3 or nace9q3 or nace10q3, 3, qual)
+               - qual: if(nace1q4 or nace2q4 or nace3q4 or nace4q4 or nace5q4 or nace6q4 or nace7q4 or nace8q4 or nace9q4 or nace10q4, 4, qual)
+    
+              
+               - ea: if(nace==-1 and working_retired==True, False, ea)
+               - status: if(status==-1 and working_retired==True and nace==-1, RETIRED, status)                
+               - working_retired: if(working_retired==True and nace==-1, False, working_retired)
+               
+            unemployment():               
+               - status: if(ea and nace==-1, UNEMPLOYED, status)
+               - status: if(ea and not nace==-1, EMPLOYED, status)
+               - status: if(ea and status==UNEMPLOYED and toret>=0, RETIRED, status)
+             
+            csv_output():
+               - replacement: if(lag(status==1) and status>=4, True, False)
+#               - csv(period, groupby(period, status, age, immigrant), fname='o1_JPM_lab_supply_age.csv', mode='a')
+#               - csv(period, groupby(period, status, nace, qual, immigrant, period), fname='nace_immigrant.csv', mode='a')
+#               - csv(period, groupby(period, lag(nace), nace, replacement, status,lag(status), period), fname='replacement_nace.csv', mode='a')
+#               - csv(period, groupby(period, lag(nace), hatfield, replacement,lag(status), status, period), fname='replacement_hatfield.csv', mode='a')
+#               - csv(period, groupby(period, lag(nace), hatlev5, replacement, status,lag(status), period), fname='replacement_hatlev.csv', mode='a')
+#               - csv(period, groupby(period, status, age, replacement, hatlev5,lag(status), period), fname='age.csv', mode='a')
+#               - csv(period, groupby(period, status, lag(status), hatlev5, replacement, hatfield,period), fname='replacement_hatlev_hatfield.csv', mode='a')
+
+#               - csv(period, groupby(status_compl), fname='status_compl.csv', mode='a')
+#               - csv(period, groupby(period, status_compl, qual, ageg, hatlev3, immigrant, region), fname='status_compl_tomas.csv', mode='a')
+#               - csv(period, groupby(period, status, qual, nace, lag(status), lag(nace), region), fname='status.csv', mode='a')
+#               - csv(groupby(lag(nace, qual), nace, qual), fname='nace.csv', mode='a')
+#               - csv(period, groupby(period, lag(nace), nace, lag(qual), qual, age, replacement, working_retired, hatlev5), fname='o6_JPM_replacement.csv', mode='a')
+#               - csv(period, groupby(period, hatlev5, hatfield1, status, nace, qual, region, filter=ea), fname='scenario1_edu.csv', mode='a')
+#               - csv(period, groupby(period, country_b, qual, nace, hatlev3, status, immigrant), fname='o7_JPM__immigrant.csv', mode='a')                
+#                - csv(period, groupby(period, lag(nace_compl), replacement, status_compl, nace_compl, qual_compl, region), fname='base_compl_replacement_nace2.csv', mode='a')             
+ #              - csv(period, groupby(period, lag(nace), replacement, status, nace, qual, region), fname='scenario1_replacement_nace1.csv', mode='a')             
+#               - csv(period, groupby(period, nace, nace_compl, status_compl, status, qual, qual_compl, region), fname='base_compl_status.csv', mode='a')               
+#               - csv(period, groupby(lag(nace_compl), lag(qual_compl), status), fname='replacement_ret_nace.csv', mode='a')              
+#              - csv(period, groupby(lag(hatlev5), lag(hatfield1), status), fname='replacement_ret_edu.csv', mode='a')              
+#               - csv(groupby(lag(nace), status, period), fname='replacement_status.csv', mode='a')              
+#               - csv(period, groupby(lag(nace), working_retired), fname='working_retired.csv', mode='a')
+#               - csv(period, groupby(lag(nace), retired_early), fname='retired early.csv', mode='a')  
+#               - csv(period, groupby (period, age, working_retired, nace_compl, region, filter=age>=60), fname='working_retired.csv', mode='a') 
+
+   
+simulation: 
+    init: 
+        - person: [age1, nace1, edulev_init, status1]  
+    processes:
+        - person: [ageing, birth, death, immigration, edulev, edufield, statusing, study, retirement, inactivity, disability, economic_activity, employment, employment_nace_score, employment_nace, employment_nace_immigrants, immigrants_family, employment_nace_qual ,unemployment, csv_output]
+
+    input:
+        path:   "INPUT_DATA"
+        file:   "lfs2017.h5"
+
+    output:
+        path:   "OUTPUT_DATA"
+        file:   "simulation.h5"
+        
+    start_period: 2012
+    
+    periods: 1
+    
+    random_seed: 10000    
+     
+     
+     
+     
+     
+     

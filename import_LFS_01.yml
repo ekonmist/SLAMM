@@ -1,0 +1,33 @@
+
+output: INPUT_DATA/lfs2017.h5
+globals:
+    periodic:
+        path: INPUT_DATA/global_10_4_vyber.csv
+        transposed: True
+      
+entities:
+    person:
+       path: INPUT_DATA\lfs2011_25sample.csv
+       fields:
+            - hhnum: int
+            - hhseqnum: int
+            - sex: int
+            - qual3: int
+            - qual4: int
+            - isco: int
+            - ageg: int
+            - ilostat: int
+            - hatfield1: int
+            - status: int
+            - status1y: int
+#            - nace_1d: int
+#            - nace_1y: int
+            - nace10: int
+            - nace: int
+            - nace10_1y: int
+            - coeff: float
+            - hatlev3: int
+            - hatlev5: int
+            - country_b: int
+            - pocet_deti: int
+

@@ -1,0 +1,348 @@
+import: 
+     - demo_LFS_01.yml
+     
+# input global variables - share of education level and share of field of education 
+globals: 
+     edutable:
+         path: edu_level.csv
+         fields:
+         - PERIOD: int
+         - PL: float 
+         - LSL: float
+         - HSL: float
+         - PSL: float
+         - TL: float
+     fieldtable:
+         path: field_level.csv
+         fields:
+         - PERIOD: int
+         - LSF0: float
+         - LSF1: float
+         - LSF2: float
+         - LSF3: float
+         - LSF4: float
+         - LSF5: float
+         - LSF6: float
+         - LSF7: float
+         - LSF8: float
+         - LSF9: float
+         - LSF10: float
+         - HSF0: float
+         - HSF1: float
+         - HSF2: float
+         - HSF3: float
+         - HSF4: float
+         - HSF5: float
+         - HSF6: float
+         - HSF7: float
+         - HSF8: float
+         - HSF9: float
+         - HSF10: float
+         - PSF0: float
+         - PSF1: float
+         - PSF2: float
+         - PSF3: float
+         - PSF4: float
+         - PSF5: float
+         - PSF6: float
+         - PSF7: float
+         - PSF8: float
+         - PSF9: float
+         - PSF10: float
+         - TF0: float
+         - TF1: float
+         - TF2: float
+         - TF3: float
+         - TF4: float
+         - TF5: float
+         - TF6: float
+         - TF7: float
+         - TF8: float
+         - TF9: float
+         - TF10: float
+         
+# definig fields from input file and new fields     
+     
+entities: 
+     person: 
+         fields:
+            - hatlev3: int
+            - hatfield1: int
+            - level: {type: int, initialdata: False}
+            - field: {type: int, initialdata: False}
+            - hatlev: {type: int, initialdata: False}            
+            - hatfield: {type: int, initialdata: False}
+            
+         macros:
+            PRIMARY: hatlev5==1
+            LOWER_SECONDARY: hatlev5==2
+            UPPER_SECONDARY: hatlev5==3
+            POST_SECONDARY: hatlev5==4
+            TERTIARY: hatlev5==5
+
+            GRADUATIONAGE_P: 16   
+	    GRADUATIONAGE_LS: 20
+            GRADUATIONAGE_US: 20
+            GRADUATIONAGE_PS: 20
+            GRADUATIONAGE_T: 25
+
+# defining macros from global variables (external table)
+            # BASED ON: tab hatlev5 if ageg==5 & country_b==1             
+            P: edutable.PL[period]
+            LS: edutable.LSL[period] 
+            US: edutable.HSL[period] 
+            PS: edutable.PSL[period] 
+            T: edutable.TL[period] 
+            # BASED ON: tab hatlev5 hatfield1 if ageg==5 & country_b==1
+            LSF0: fieldtable.LSF0[period]
+            LSF1: fieldtable.LSF1[period]
+            LSF2: fieldtable.LSF2[period]
+            LSF3: fieldtable.LSF3[period]
+            LSF4: fieldtable.LSF4[period]
+            LSF5: fieldtable.LSF5[period]
+            LSF6: fieldtable.LSF6[period]
+            LSF7: fieldtable.LSF7[period]
+            LSF8: fieldtable.LSF8[period]
+            LSF9: fieldtable.LSF9[period]
+            LSF10: fieldtable.LSF10[period]
+            HSF0: fieldtable.HSF0[period]
+            HSF1: fieldtable.HSF1[period]
+            HSF2: fieldtable.HSF2[period]
+            HSF3: fieldtable.HSF3[period]
+            HSF4: fieldtable.HSF4[period]
+            HSF5: fieldtable.HSF5[period]
+            HSF6: fieldtable.HSF6[period]
+            HSF7: fieldtable.HSF7[period]
+            HSF8: fieldtable.HSF8[period]
+            HSF9: fieldtable.HSF9[period]
+            HSF10: fieldtable.HSF10[period]
+            PSF0: fieldtable.PSF0[period]
+            PSF1: fieldtable.PSF1[period]
+            PSF2: fieldtable.PSF2[period]
+            PSF3: fieldtable.PSF3[period]
+            PSF4: fieldtable.PSF4[period]
+            PSF5: fieldtable.PSF5[period]
+            PSF6: fieldtable.PSF6[period]
+            PSF7: fieldtable.PSF7[period]
+            PSF8: fieldtable.PSF8[period]
+            PSF9: fieldtable.PSF9[period]
+            PSF10: fieldtable.PSF10[period]
+            TF0: fieldtable.TF0[period]
+            TF1: fieldtable.TF1[period]
+            TF2: fieldtable.TF2[period]
+            TF3: fieldtable.TF3[period]
+            TF4: fieldtable.TF4[period]
+            TF5: fieldtable.TF5[period]
+            TF6: fieldtable.TF6[period]
+            TF7: fieldtable.TF7[period]
+            TF8: fieldtable.TF8[period]
+            TF9: fieldtable.TF9[period]
+            TF10: fieldtable.TF10[period]            
+            
+         
+         processes: 
+             edulev(): 
+               - hatlev: hatlev5
+               - level: if(age==GRADUATIONAGE_P, 
+                        choice([1, 2, 3, 4, 5],
+                        [P, LS, US, PS, T]),
+                         9999) 
+#  "D:\data\Malta\MT_microsim\INPUT_DATA\lfs2016_MT.csv"
+#  tab hatlev5 if ageg==5
+#  Missings on hatlev5 (hat11lev) not included in the computation of the proportions
+
+               - hatlev5: if(age<GRADUATIONAGE_P, 1, hatlev5)
+               - hatlev5: if(age==GRADUATIONAGE_P, level, hatlev5)
+               - hatlev3: if(hatlev5==1, 1, 
+                             if(hatlev5==5, 3, 2))             
+             edufield():
+               - hatfield: if(hatfield1==-1, 99, hatfield1)              
+               - field: if(PRIMARY, 
+                           0,
+                           if(LOWER_SECONDARY,
+                           choice([0,1,2,3,4,5,6,7,8,9,10], 
+                           [LSF0, LSF1, LSF2, LSF3, LSF4, LSF5, LSF6, LSF7, LSF8, LSF9, LSF10]),
+                           if(UPPER_SECONDARY, 
+                           choice([0,1,2,3,4,5,6,7,8,9,10], 
+                           [HSF0, HSF1, HSF2, HSF3, HSF4, HSF5, HSF6, HSF7, HSF8, HSF9, HSF10]), 
+                           if(POST_SECONDARY,
+                           choice([0,1,2,3,4,5,6,7,8,9,10], 
+                           [PSF0, PSF1, PSF2, PSF3, PSF4, PSF5, PSF6, PSF7, PSF8, PSF9, PSF10]), 
+                           if(TERTIARY, 
+                           choice([0,1,2,3,4,5,6,7,8,9,10], 
+                           [TF0, TF1, TF2, TF3, TF4, TF5, TF6, TF7, TF8, TF9, TF10]), 
+                           99)))))                   
+# #  tab hatfield1 if hatlev5==2 & ageg==5 & country_b==1, nolab
+# #  tab hatfield1 if hatlev5==3 & ageg==5 & country_b==1, nolab
+# #  tab hatfield1 if hatlev5==4 & ageg==5 & country_b==1, nolab
+# #  tab hatfield1 if hatlev5==5 & ageg==5 & country_b==1, nolab
+
+  
+               - hatfield: if(age==15, field, hatfield)    
+               - hatfield: if(hatfield==-2, field, hatfield)
+               - hatfield: if(hatfield==99, field, hatfield)               
+#               - hatfield: if(hatfield==99, 0, hatfield)
+#               - hatfield: if(hatlev5==1, 0, hatfield)
+               
+             edulev_init(): 
+               - primary_score: if(hatlev5==1, 1, 0)
+               - ls_score: if(hatlev5==2, 1, 0)
+               - us_score: if(hatlev5==3, 1, 0)
+               - us_score: if(hatlev5==3 and status1y==3, us_score-0.2, us_score)
+               - ps_score: if(hatlev5==4, 1, 0)
+               - ps_score: if(hatlev5==4 and status1y==3, ps_score-0.2, ps_score)
+               - tertiary_score: if(hatlev5==5, 1, 0)
+               - tertiary_score: if(hatlev5==5 and status1y==3, tertiary_score+0.2, tertiary_score)
+               
+               - primary_: if(age==GRADUATIONAGE_P, align(primary_score, [(P), (US+LS+PS+T)]), False)
+               - lower_secondary_: if(age==GRADUATIONAGE_P, align(ls_score, [(LS), (US+P+PS+T)], leave= primary_), False)
+               - upper_secondary_: if(age==GRADUATIONAGE_P, align(us_score, [(US), (LS+P+PS+T)], leave= primary_ or lower_secondary_), False)
+               - post_secondary_: if(age==GRADUATIONAGE_P, align(ps_score, [(PS), (LS+P+US+T)], leave= primary_ or lower_secondary_ or upper_secondary_), False)
+               - tertiary_: if(age==GRADUATIONAGE_P, align(tertiary_score, [(T), (LS+P+PS+US)], leave=primary_ or lower_secondary_ or upper_secondary_ or post_secondary_), False)
+               - hatlev5: if(age==GRADUATIONAGE_P, 
+                           if(primary_, 1,
+                            if(lower_secondary_, 2,
+                             if(upper_secondary_, 3, 
+                                if(post_secondary_, 4, 
+                                   if(tertiary_, 5, hatlev5))))), hatlev5)
+
+               - primary_1: if(age==GRADUATIONAGE_P+1, align(primary_score, [(P), (US+LS+PS+T)]), False)
+               - lower_secondary_1: if(age==GRADUATIONAGE_P+1, align(ls_score, [(LS), (US+P+PS+T)], leave= primary_1), False)
+               - upper_secondary_1: if(age==GRADUATIONAGE_P+1, align(us_score, [(US), (LS+P+PS+T)], leave= primary_1 or lower_secondary_1), False)
+               - post_secondary_1: if(age==GRADUATIONAGE_P+1, align(ps_score, [(PS), (LS+P+US+T)], leave= primary_1 or lower_secondary_1 or upper_secondary_1), False)
+               - tertiary_1: if(age==GRADUATIONAGE_P+1, align(tertiary_score, [(T), (LS+P+PS+US)], leave=primary_1 or lower_secondary_1 or upper_secondary_1 or post_secondary_1), False)
+               - hatlev5: if(age==GRADUATIONAGE_P+1, 
+                           if(primary_1, 1,
+                            if(lower_secondary_1, 2,
+                             if(upper_secondary_1, 3, 
+                                if(post_secondary_1, 4, 
+                                   if(tertiary_1, 5, hatlev5))))), hatlev5)
+                                   
+                                   
+               - primary_2: if(age==GRADUATIONAGE_P+2, align(primary_score, [(P), (US+LS+PS+T)]), False)
+               - lower_secondary_2: if(age==GRADUATIONAGE_P+2, align(ls_score, [(LS), (US+P+PS+T)], leave= primary_2), False)
+               - upper_secondary_2: if(age==GRADUATIONAGE_P+2, align(us_score, [(US), (LS+P+PS+T)], leave= primary_2 or lower_secondary_2), False)
+               - post_secondary_2: if(age==GRADUATIONAGE_P+2, align(ps_score, [(PS), (LS+P+US+T)], leave= primary_2 or lower_secondary_2 or upper_secondary_2), False)
+               - tertiary_2: if(age==GRADUATIONAGE_P+2, align(tertiary_score, [(T), (LS+P+PS+US)], leave=primary_2 or lower_secondary_2 or upper_secondary_2 or post_secondary_2), False)
+               - hatlev5: if(age==GRADUATIONAGE_P+2, 
+                           if(primary_2, 1,
+                            if(lower_secondary_2, 2,
+                             if(upper_secondary_2, 3, 
+                                if(post_secondary_2, 4, 
+                                   if(tertiary_2, 5, hatlev5))))), hatlev5)
+
+               - primary_3: if(age==GRADUATIONAGE_P+3, align(primary_score, [(P), (US+LS+PS+T)]), False)
+               - lower_secondary_3: if(age==GRADUATIONAGE_P+3, align(ls_score, [(LS), (US+P+PS+T)], leave= primary_3), False)
+               - upper_secondary_3: if(age==GRADUATIONAGE_P+3, align(us_score, [(US), (LS+P+PS+T)], leave= primary_3 or lower_secondary_3), False)
+               - post_secondary_3: if(age==GRADUATIONAGE_P+3, align(ps_score, [(PS), (LS+P+US+T)], leave= primary_3 or lower_secondary_3 or upper_secondary_3), False)
+               - tertiary_3: if(age==GRADUATIONAGE_P+3, align(tertiary_score, [(T), (LS+P+PS+US)], leave=primary_3 or lower_secondary_3 or upper_secondary_3 or post_secondary_3), False)
+               - hatlev5: if(age==GRADUATIONAGE_P+3, 
+                           if(primary_3, 1,
+                            if(lower_secondary_3, 2,
+                             if(upper_secondary_3, 3, 
+                                if(post_secondary_3, 4, 
+                                   if(tertiary_3, 5, hatlev5))))), hatlev5)
+
+               - primary_4: if(age==GRADUATIONAGE_P+4, align(primary_score, [(P), (US+LS+PS+T)]), False)
+               - lower_secondary_4: if(age==GRADUATIONAGE_P+4, align(ls_score, [(LS), (US+P+PS+T)], leave= primary_4), False)
+               - upper_secondary_4: if(age==GRADUATIONAGE_P+4, align(us_score, [(US), (LS+P+PS+T)], leave= primary_4 or lower_secondary_4), False)
+               - post_secondary_4: if(age==GRADUATIONAGE_P+4, align(ps_score, [(PS), (LS+P+US+T)], leave= primary_4 or lower_secondary_4 or upper_secondary_4), False)
+               - tertiary_4: if(age==GRADUATIONAGE_P+4, align(tertiary_score, [(T), (LS+P+PS+US)], leave=primary_4 or lower_secondary_4 or upper_secondary_4 or post_secondary_4), False)
+               - hatlev5: if(age==GRADUATIONAGE_P+4, 
+                           if(primary_4, 1,
+                            if(lower_secondary_4, 2,
+                             if(upper_secondary_4, 3, 
+                                if(post_secondary_4, 4, 
+                                   if(tertiary_4, 5, hatlev5))))), hatlev5)
+
+               - primary_5: if(age==GRADUATIONAGE_P+5, align(primary_score, [(P), (US+LS+PS+T)]), False)
+               - lower_secondary_5: if(age==GRADUATIONAGE_P+5, align(ls_score, [(LS), (US+P+PS+T)], leave= primary_5), False)
+               - upper_secondary_5: if(age==GRADUATIONAGE_P+5, align(us_score, [(US), (LS+P+PS+T)], leave= primary_5 or lower_secondary_5), False)
+               - post_secondary_5: if(age==GRADUATIONAGE_P+5, align(ps_score, [(PS), (LS+P+US+T)], leave= primary_5 or lower_secondary_5 or upper_secondary_5), False)
+               - tertiary_5: if(age==GRADUATIONAGE_P+5, align(tertiary_score, [(T), (LS+P+PS+US)], leave=primary_5 or lower_secondary_5 or upper_secondary_5 or post_secondary_5), False)
+               - hatlev5: if(age==GRADUATIONAGE_P+5, 
+                           if(primary_5, 1,
+                            if(lower_secondary_5, 2,
+                             if(upper_secondary_5, 3, 
+                                if(post_secondary_5, 4, 
+                                   if(tertiary_5, 5, hatlev5))))), hatlev5)
+
+               - primary_6: if(age==GRADUATIONAGE_P+6, align(primary_score, [(P), (US+LS+PS+T)]), False)
+               - lower_secondary_6: if(age==GRADUATIONAGE_P+6, align(ls_score, [(LS), (US+P+PS+T)], leave= primary_6), False)
+               - upper_secondary_6: if(age==GRADUATIONAGE_P+6, align(us_score, [(US), (LS+P+PS+T)], leave= primary_6 or lower_secondary_6), False)
+               - post_secondary_6: if(age==GRADUATIONAGE_P+6, align(ps_score, [(PS), (LS+P+US+T)], leave= primary_6 or lower_secondary_6 or upper_secondary_6), False)
+               - tertiary_6: if(age==GRADUATIONAGE_P+6, align(tertiary_score, [(T), (LS+P+PS+US)], leave=primary_6 or lower_secondary_6 or upper_secondary_6 or post_secondary_6), False)
+               - hatlev5: if(age==GRADUATIONAGE_P+6, 
+                           if(primary_6, 1,
+                            if(lower_secondary_6, 2,
+                             if(upper_secondary_6, 3, 
+                                if(post_secondary_6, 4, 
+                                   if(tertiary_6, 5, hatlev5))))), hatlev5)
+
+               - primary_7: if(age==GRADUATIONAGE_P+7, align(primary_score, [(P), (US+LS+PS+T)]), False)
+               - lower_secondary_7: if(age==GRADUATIONAGE_P+7, align(ls_score, [(LS), (US+P+PS+T)], leave= primary_7), False)
+               - upper_secondary_7: if(age==GRADUATIONAGE_P+7, align(us_score, [(US), (LS+P+PS+T)], leave= primary_7 or lower_secondary_7), False)
+               - post_secondary_7: if(age==GRADUATIONAGE_P+7, align(ps_score, [(PS), (LS+P+US+T)], leave= primary_7 or lower_secondary_7 or upper_secondary_7), False)
+               - tertiary_7: if(age==GRADUATIONAGE_P+7, align(tertiary_score, [(T), (LS+P+PS+US)], leave=primary_7 or lower_secondary_7 or upper_secondary_7 or post_secondary_7), False)
+               - hatlev5: if(age==GRADUATIONAGE_P+7, 
+                           if(primary_7, 1,
+                            if(lower_secondary_7, 2,
+                             if(upper_secondary_7, 3, 
+                                if(post_secondary_7, 4, 
+                                   if(tertiary_7, 5, hatlev5))))), hatlev5)
+
+               - primary_8: if(age==GRADUATIONAGE_P+8, align(primary_score, [(P), (US+LS+PS+T)]), False)
+               - lower_secondary_8: if(age==GRADUATIONAGE_P+8, align(ls_score, [(LS), (US+P+PS+T)], leave= primary_8), False)
+               - upper_secondary_8: if(age==GRADUATIONAGE_P+8, align(us_score, [(US), (LS+P+PS+T)], leave= primary_8 or lower_secondary_8), False)
+               - post_secondary_8: if(age==GRADUATIONAGE_P+8, align(ps_score, [(PS), (LS+P+US+T)], leave= primary_8 or lower_secondary_8 or upper_secondary_8), False)
+               - tertiary_8: if(age==GRADUATIONAGE_P+8, align(tertiary_score, [(T), (LS+P+PS+US)], leave=primary_8 or lower_secondary_8 or upper_secondary_8 or post_secondary_8), False)
+               - hatlev5: if(age==GRADUATIONAGE_P+8, 
+                           if(primary_8, 1,
+                            if(lower_secondary_8, 2,
+                             if(upper_secondary_8, 3, 
+                                if(post_secondary_8, 4, 
+                                   if(tertiary_8, 5, hatlev5))))), hatlev5)
+
+               - primary_9: if(age==GRADUATIONAGE_P+9, align(primary_score, [(P), (US+LS+PS+T)]), False)
+               - lower_secondary_9: if(age==GRADUATIONAGE_P+9, align(ls_score, [(LS), (US+P+PS+T)], leave= primary_9), False)
+               - upper_secondary_9: if(age==GRADUATIONAGE_P+9, align(us_score, [(US), (LS+P+PS+T)], leave= primary_9 or lower_secondary_9), False)
+               - post_secondary_9: if(age==GRADUATIONAGE_P+9, align(ps_score, [(PS), (LS+P+US+T)], leave= primary_9 or lower_secondary_9 or upper_secondary_9), False)
+               - tertiary_9: if(age==GRADUATIONAGE_P+9, align(tertiary_score, [(T), (LS+P+PS+US)], leave=primary_9 or lower_secondary_9 or upper_secondary_9 or post_secondary_9), False)
+               - hatlev5: if(age==GRADUATIONAGE_P+9, 
+                           if(primary_9, 1,
+                            if(lower_secondary_9, 2,
+                             if(upper_secondary_9, 3, 
+                                if(post_secondary_9, 4, 
+                                   if(tertiary_9, 5, hatlev5))))), hatlev5)
+
+               - primary_10: if(age==GRADUATIONAGE_P+10, align(primary_score, [(P), (US+LS+PS+T)]), False)
+               - lower_secondary_10: if(age==GRADUATIONAGE_P+10, align(ls_score, [(LS), (US+P+PS+T)], leave= primary_10), False)
+               - upper_secondary_10: if(age==GRADUATIONAGE_P+10, align(us_score, [(US), (LS+P+PS+T)], leave= primary_10 or lower_secondary_10), False)
+               - post_secondary_10: if(age==GRADUATIONAGE_P+10, align(ps_score, [(PS), (LS+P+US+T)], leave= primary_10 or lower_secondary_10 or upper_secondary_10), False)
+               - tertiary_10: if(age==GRADUATIONAGE_P+10, align(tertiary_score, [(T), (LS+P+PS+US)], leave=primary_10 or lower_secondary_10 or upper_secondary_10 or post_secondary_10), False)
+               - hatlev5: if(age==GRADUATIONAGE_P+10, 
+                           if(primary_10, 1,
+                            if(lower_secondary_10, 2,
+                             if(upper_secondary_10, 3, 
+                                if(post_secondary_10, 4, 
+                                   if(tertiary_10, 5, hatlev5))))), hatlev5)
+
+
+simulation: 
+    init: 
+        - person: [age1, nace1, edulev_init]
+    processes:
+        - person: [ageing, birth, death, immigration, edulev, edufield]
+    
+    input:
+        path:   "INPUT_DATA"
+        file:   "lfs2017.h5"
+
+    output:
+        path:   "OUTPUT_DATA"
+        file:   "simulation.h5"
+        
+    start_period: 2012
+    
+    periods: 8
+    random_seed: 10000  

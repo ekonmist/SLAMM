@@ -1,0 +1,318 @@
+import: 
+     - demo_LFS_01.yml
+     - edu_LFS_01.yml
+
+# input global variables - demand by nace and qualifications 
+globals:
+     periodic:
+         fields:
+            - N1q1: int
+            - N2q1: int
+            - N3q1: int
+            - N4q1: int
+            - N5q1: int
+            - N6q1: int
+            - N7q1: int
+            - N8q1: int
+            - N9q1: int
+            - N10q1: int
+            - N1q2: int
+            - N2q2: int
+            - N3q2: int
+            - N4q2: int
+            - N5q2: int
+            - N6q2: int
+            - N7q2: int
+            - N8q2: int
+            - N9q2: int
+            - N10q2: int
+            - N1q3: int
+            - N2q3: int
+            - N3q3: int
+            - N4q3: int
+            - N5q3: int
+            - N6q3: int
+            - N7q3: int
+            - N8q3: int
+            - N9q3: int
+            - N10q3: int
+            - N1q4: int
+            - N2q4: int
+            - N3q4: int
+            - N4q4: int
+            - N5q4: int
+            - N6q4: int
+            - N7q4: int
+            - N8q4: int
+            - N9q4: int
+            - N10q4: int     
+
+# input global variables - retirement age, average wage, share of unemployment rate and elasticity of inactivity              
+     globaltable:
+         path: globaltable_strop.csv
+         transposed: True 
+         fields:
+            - PERIOD: int
+            - MALE_RA: float
+            - FEMALE_RA_0: float 
+            - FEMALE_RA_1: float 
+            - FEMALE_RA_2: float 
+            - FEMALE_RA_3_4: float 
+            - FEMALE_RA_5: float 
+            - W_avg: float
+            - unem_rate: float
+            - inac_elas: float
+    
+entities: 
+     person: 
+         fields:           
+            - ea: {type: bool, initialdata: False}
+            - retired: {type: bool, initialdata: False}
+            - working_retired: {type: bool, initialdata: False}
+            - retired_early: {type: bool, initialdata: False}
+            - student: {type: bool, initialdata: False}
+            - disabled: {type: bool, initialdata: False}
+            - maternity: {type: bool, initialdata: False}
+            - inactivity: {type: bool, initialdata: False}
+            - inactivity_plus: {type: bool, initialdata: False}
+            - toret: {type: int, initialdata: False}      
+            - immigrant_new: {type: bool, initialdata: False} 
+            
+         macros:
+# defining macros from global variables (external table)
+            MALE_RA: globaltable.MALE_RA[period]
+            FEMALE_RA_0: globaltable.FEMALE_RA_0[period]
+            FEMALE_RA_1: globaltable.FEMALE_RA_1[period]
+            FEMALE_RA_2: globaltable.FEMALE_RA_2[period]
+            FEMALE_RA_3_4: globaltable.FEMALE_RA_3_4[period]
+            FEMALE_RA_5: globaltable.FEMALE_RA_5[period]
+            W_avg: globaltable.W_avg[period]
+            unem_rate: globaltable.unem_rate[period]
+            inac_elas: globaltable.inac_elas[period] 
+         
+            EMPLOYED: 1
+            UNEMPLOYED: 2
+            STUDENT: 3
+            RETIRED: 4
+            DISABLED: 5
+            INACTIVE: 6
+
+            IS_EMPLOYED: status==1
+            IS_UNEMPLOYED: status==2
+            IS_STUDENT: status==3
+            IS_RETIRED: status==4
+            IS_DISABLED: status==5
+            IS_INACTIVE: status==6
+
+            WAS_EMPLOYED: status1y==1
+            WAS_UNEMPLOYED: status1y==2
+            WAS_STUDENT: status1y==3
+            WAS_RETIRED: status1y==4
+            WAS_DISABLED: status1y==5
+            WAS_INACTIVE: status1y==6            
+
+            ISMALE: sex == 1
+            ISFEMALE: sex == 2            
+
+#            BA: region==1
+#            ZAPAD: region==2
+#            STRED: region==3
+#            VYCHOD: region==4
+
+            AGEG17: age>=15 and age<=19
+            AGEG22: age>=20 and age<=24
+            AGEG27: age>=25 and age<=29
+            AGEG32: age>=30 and age<=34
+            AGEG37: age>=35 and age<=39
+            AGEG42: age>=40 and age<=44
+            AGEG47: age>=45 and age<=49
+            AGEG52: age>=50 and age<=54
+            AGEG57: age>=55 and age<=59
+            AGEG62: age>=60 and age<=64
+            AGEG67: age>=65 and age<=69
+
+            FIELD0: hatfield1==0 or hatfield1==99
+            FIELD1: hatfield1==1
+            FIELD2: hatfield1==2
+            FIELD3: hatfield1==3
+            FIELD4: hatfield1==4
+            FIELD5: hatfield1==5
+            FIELD6: hatfield1==6
+            FIELD7: hatfield1==7
+            FIELD8: hatfield1==8
+            FIELD9: hatfield1==9
+            FIELD10: hatfield1==10
+            
+            AGRO: nace10==1
+            MINING: nace10==2
+            INDUSTRY: nace10==3
+            ENERGY: nace10==4
+            CONSTRUCTION: nace10==5
+            MAR_SERVICES_1: nace10==6
+            MAR_SERVICES_2: nace10==7
+            PROF_AND_ADM_SERVICES: nace10==8
+            NMAR_SERVICES: nace10==9
+            OTHER: nace10==10  
+
+            L_AGRO: nace10_1y==1
+            L_MINING: nace10_1y==2
+            L_INDUSTRY: nace10_1y==3
+            L_ENERGY: nace10_1y==4
+            L_CONSTRUCTION: nace10_1y==5
+            L_MAR_SERVICES_1: nace10_1y==6
+            L_MAR_SERVICES_2: nace10_1y==7
+            L_PROF_AND_ADM_SERVICES: nace10_1y==8
+            L_NMAR_SERVICES: nace10_1y==9
+            L_OTHER: nace10_1y==10  
+                                    
+
+            
+         processes: 
+            statusing(): 
+               - status1y: status                             
+#               - status: status
+               - status: -1
+
+               
+#             EXITING LF PROCESSES                                 
+            study(): 
+               - student: if(age<GRADUATIONAGE_P, True, False)
+               - student: if(hatlev5==1, 
+                            if(age<=GRADUATIONAGE_P,
+                            True, 
+                            False), student)
+               - student: if(hatlev5==2, 
+                            if(age<=GRADUATIONAGE_LS,
+                            True, 
+                            False), student)
+               - student: if(hatlev5==3, 
+                            if(age<=GRADUATIONAGE_US,
+                            True, 
+                            False), student)                            
+               - student: if(hatlev5==4, 
+                            if(age<=GRADUATIONAGE_PS,
+                            True, 
+                            False), student)  
+               - student: if(hatlev5==5, 
+                            if(age<=GRADUATIONAGE_T,
+                            True, 
+                            False), student)                                                 
+#               - status: if(status1y<>3), status, if(student, STUDENT, status))             
+               
+               - status: if(student, STUDENT, status)             
+
+            retirement():
+               - retired: if(ISMALE and age_float>MALE_RA, True, retired)
+               - retired: if(ISFEMALE and age_float>FEMALE_RA_0 and pocet_deti==0, True, retired)
+               - retired: if(ISFEMALE and age_float>FEMALE_RA_1 and pocet_deti==1, True, retired)
+               - retired: if(ISFEMALE and age_float>FEMALE_RA_2 and pocet_deti==2, True, retired)
+               - retired: if(ISFEMALE and age_float>FEMALE_RA_3_4 and pocet_deti>=3 and pocet_deti<=4, True, retired)
+               - retired: if(ISFEMALE and age_float>FEMALE_RA_5 and pocet_deti>=5, True, retired)               
+               - toret: if(ISMALE,  trunc(age_float-MALE_RA), 
+                        if(pocet_deti==0, trunc(age_float-FEMALE_RA_0),
+                        if(pocet_deti==1, trunc(age_float-FEMALE_RA_1),
+                        if(pocet_deti==2, trunc(age_float-FEMALE_RA_2),
+                        if(pocet_deti>=3 and pocet_deti<=4, trunc(age_float-FEMALE_RA_3_4), trunc(age_float-FEMALE_RA_5))))))
+               
+               
+#  logit early_ret ISFEMALE PRIMARY LOWER_SECONDARY  UPPER_SECONDARY POST_SECONDARY  L_AGRO L_INDUSTRY L_CONSTRUCTION L_MAR_SERVICES_1 L_MAR_SERVICES_2 L_PROF_AND_ADM_SERVICES L_NMAR_SERVICES L_OTHER
+               - retired_early_score: logit_score(ISFEMALE*(2.072878)+PRIMARY*(-0.7002994)+LOWER_SECONDARY*(0.6632286)+UPPER_SECONDARY*(0.5041857)+POST_SECONDARY*(0.0378838)+L_AGRO*(-0.4912505)+L_INDUSTRY*(-1.79426)+L_CONSTRUCTION*(-1.417654)+L_MAR_SERVICES_1*(-2.580714)+L_MAR_SERVICES_2*(-3.826446)+L_PROF_AND_ADM_SERVICES*(-3.411587)+L_NMAR_SERVICES*(-1.699302)+L_OTHER*(-1.938909)+1*(-5.579377))  
+               - retired_early: if(ISMALE, align(retired_early_score,'early_retired_male.csv', filter=toret<=0 and age>15),
+                                           align(retired_early_score,'early_retired_female.csv', filter=toret<=0 and age>15))
+               - status: if(retired, RETIRED, status)
+#               - status: if(retired_early, RETIRED, status)    
+               - status: if(status1y==RETIRED, RETIRED, status)
+
+# logit ret_work ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY L_AGRO L_INDUSTRY L_ENERGY L_CONSTRUCTION L_MAR_SERVICES_1 L_MAR_SERVICES_2 L_PROF_AND_ADM_SERVICES L_NMAR_SERVICES L_OTHER
+               - working_retired_score: logit_score(ISFEMALE*(-0.8475698)+PRIMARY*(-2.138078)+LOWER_SECONDARY*(-0.8904242)+UPPER_SECONDARY*(-0.7684793)+POST_SECONDARY*(0.2766699)+L_AGRO*(1.390121)+L_INDUSTRY*(0.4612937)+L_ENERGY*(0.7377011)+L_CONSTRUCTION*(0.965102)+L_MAR_SERVICES_1*(0.1229672)+L_MAR_SERVICES_2*(-0.3177247)+L_PROF_AND_ADM_SERVICES*(1.417465)+L_NMAR_SERVICES*(1.002174)+L_OTHER*(1.527506)+1*(-3.648906))
+               - working_retired_score: if(status1y==1, working_retired_score+1, working_retired_score) 
+               - working_retired: if(toret>=0 , 
+                                  if(ISMALE, align(working_retired_score, 'working_retired_male.csv'), align(working_retired_score, 'working_retired_female.csv')), False)   
+               - status: if(working_retired==True, -1, status)                                            
+            disability():
+#  logit disability ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY L_AGRO L_INDUSTRY L_ENERGY L_CONSTRUCTION L_MAR_SERVICES_1 L_MAR_SERVICES_2 L_PROF_AND_ADM_SERVICES L_NMAR_SERVICES L_OTHER AGEG17 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57, iter(10)        
+               - disabled_score: logit_regr(ISFEMALE*(-0.6073501)+PRIMARY*(1.595294)+LOWER_SECONDARY*(1.516745)+UPPER_SECONDARY*(1.122193)+POST_SECONDARY*(1.147261)+L_AGRO*(-5.530918)+L_INDUSTRY*(-4.630152)+L_ENERGY*(-4.866968)+L_CONSTRUCTION*(-4.887245)+L_MAR_SERVICES_1*(-5.126169)+L_MAR_SERVICES_2*(-3.659546)+L_PROF_AND_ADM_SERVICES*(-3.884291)+L_NMAR_SERVICES*(-4.157779)+L_OTHER*(-5.352162)+AGEG17*(-0.7880609)+AGEG22*(0.7387431)+AGEG27*(2.380779)+AGEG32*(2.710976)+AGEG37*(3.296139)+AGEG42*(3.409024)+AGEG47*(3.953091)+AGEG52*(4.446279)+AGEG57*(4.180768)+1*(-6.198907)) 
+               - disabled_score: if(status1y==5, 3, disabled_score)                  
+               - disabled: if(status==-1 and toret<=0 and not immigrant_new, 
+                              if(ISMALE,
+                                 align(disabled_score, 'disability_male.csv'),
+                                 align(disabled_score, 'disability_female.csv')),
+                                 False) 
+#                                 align(disabled_score, 'disability_male.csv', leave=retired and student),
+#                                 align(disabled_score, 'disability_female.csv', leave=retired and student)),
+#               - disabled: if(True and ISMALE and age_float>MALE_RA, False, disabled)
+#               - disabled: if(status1y==3 and disabled, False, disabled)
+#   Table: disability_scr.csv                         
+#   table ageg if status!=3 & status!=4, c(mean disability)
+               - status: if(disabled, DISABLED, status)                           
+            inactivity():          
+               - maternity: if(to_give_birth, 
+                                 True,
+                                 False)                 
+               - maternity: if(lag(to_give_birth), 
+                                 True,
+                                 False) 
+               
+
+#               - maternity: if(lag(maternity) and ( not lag(to_give_birth) or not lag(lag(to_give_birth)) or not lag(lag(lag(to_give_birth)))), False, maternity)
+# logit IS_INACTIVE ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY L_AGRO L_MINING L_INDUSTRY L_ENERGY L_CONSTRUCTION L_MAR_SERVICES_1 L_MAR_SERVICES_2 L_PROF_AND_ADM_SERVICES L_NMAR_SERVICES L_OTHER AGEG17 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57 , iter(10)
+               - inactivity_score: logit_score(ISFEMALE*(1.814913)+PRIMARY*(0.4477194)+LOWER_SECONDARY*(0.3686484)+UPPER_SECONDARY*(0.3492937)+POST_SECONDARY*(-0.1233667)+L_AGRO*(-3.082172)+L_MINING*(-2.281815)+L_INDUSTRY*(-2.994911)+L_ENERGY*(-2.990666)+L_CONSTRUCTION*(-2.560622)+L_MAR_SERVICES_1*(-2.940291)+L_MAR_SERVICES_2*(-3.134852)+L_PROF_AND_ADM_SERVICES*(-2.436775)+L_NMAR_SERVICES*(-3.123976)+L_OTHER*(-2.897759)+AGEG17*(3.386279)+AGEG22*(5.211106)+AGEG27*(6.874551)+AGEG32*(7.237939)+AGEG37*(6.712798)+AGEG42*(6.13549)+AGEG47*(5.82061)+AGEG52*(5.683829)+AGEG57*(5.253636)+1*(-9.27789))
+#               - inactivity_score: if(ISFEMALE and age>40, if(WAS_INACTIVE, 3, inactivity_score),inactivity_score)
+               - inactivity_score: if(ISMALE, if(status1y==6, inactivity_score+1, inactivity_score),inactivity_score)
+               - inactivity_score: if(ISFEMALE, if(status1y==6, inactivity_score+1, inactivity_score),inactivity_score)
+# maternity in inactivity ?
+#               - inactivity_score: if(maternity, inactivity_score+3, inactivity_score)
+                             
+               - inactivity: if(status==-1 and age>14 and toret<=0,
+                                if(ISMALE,
+                                align(inactivity_score, 'inactivity_LFS_male.csv', leave=retired and disabled and student),
+                                align(inactivity_score, 'inactivity_LFS_female.csv')),                                
+                                False)
+# useing elasticity of inactivity                                  
+               - inactivity_plus: if(inactivity, if(W_avg/lag(W_avg)>1.015, align_abs(-inactivity_score, count(inactivity)*inac_elas),inactivity_plus),inactivity_plus)
+#               - inactivity: if(inactivity==True and sex==1 and age_float>MALE_RA, False, inactivity)
+               - inactivity: if(status1y==3 and inactivity, False, inactivity)   
+               - status: if(inactivity, INACTIVE, status)
+               
+#             ENTERING LF PROCESSES
+            economic_activity():
+               - ea: if(status==-1,
+                        True,  
+                        False)
+
+#               working retired:    
+                                          
+               - ea: if(working_retired, True, ea)  
+
+#               - status: if(ea, EMPLOYED, status)               
+              
+
+            csv_ea():
+               - csv(period, groupby(status, period), fname='status_ea.csv', mode='a')
+#               - csv(groupby(period, status, immigrant, region), fname='status_ea_immigrant.csv', mode='a')
+#               - csv(dump(period, age, age_float, days), fname='age_float.csv', mode='a')
+#                                            leave=WAS_RETIRED or IS_INACTIVE),               
+simulation: 
+    init: 
+        - person: [age1, nace1, edulev_init]
+    processes:
+        - person: [ageing, birth, death, immigration, edulev, edufield, statusing, study, retirement, inactivity, disability, economic_activity]
+    input:
+        path:   "INPUT_DATA"
+        file:   "lfs2017.h5"
+
+    output:
+        path:   "OUTPUT_DATA"
+        file:   "simulation.h5"
+        
+    start_period: 2012
+    
+    periods: 1
+    
+    random_seed: 10000        
+     
+    
+     
+     
+     
+     
