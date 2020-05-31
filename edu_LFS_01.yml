@@ -1,6 +1,11 @@
 import: 
      - demo_LFS_01.yml
-     
+#########################################################
+##  SLAMM_microsim adopts an assumption of preserving the educational structure of the most recently graduated age group of 30-34 years old. The current setting of the EDU 
+##  module is partly limited by the rationale of the scenario. Performed simulations would like to show where skill mismatches would become the bulgiest, if the structure 
+##  of education provided remains unchanged. Educational attainment is modelled in two processes.  
+#########################################################    
+
 # input global variables - share of education level and share of field of education 
 globals: 
      edutable:
@@ -81,7 +86,7 @@ entities:
             TERTIARY: hatlev5==5
 
             GRADUATIONAGE_P: 16   
-	    GRADUATIONAGE_LS: 20
+            GRADUATIONAGE_LS: 20
             GRADUATIONAGE_US: 20
             GRADUATIONAGE_PS: 20
             GRADUATIONAGE_T: 25
@@ -141,20 +146,38 @@ entities:
             
          
          processes: 
+#########################################################         
+##  Process named “edulev” simulates acquiring a particular level of highest education attained by assigning it randomly to individuals at the age 15. Three educational levels 
+##  are identified (primary, lower_secondary, upper_secondary, post_secondary and tertiary).
+##  Overall proportions of the particular levels of education within the age cohort are preserved. This is assured through an external alignment table “edu_level.csv”, fixing
+##  the proportions of the graduating cohort the same as were observed in the cohort 30-34 in the LFS data during the last observation period. Entering the proportions in a form 
+##  of a period-specific alignment table allows easier implementations of potential scenarios on future changes in the educational structure of population. 
+##  All individuals, regardless of the level of education they achieved, remain students until the age of 15 (defined by the macro “GRADUATIONAGE_P”). When they reach 
+##  the age of 15, the individuals´ education level is assigned randomly, regardless of other individual characteristics. This random assignment keeps the overall proportions 
+##  of particular levels of education the same as the educational assignment of the 30-34 year old in the most recent wave of EU-LFS (2018).  The age group of 30-34 years old 
+##  is the youngest age group whose educational attainment seems to be dominantly finalised, based on the EU-LFS data. 
+#########################################################
+         
              edulev(): 
                - hatlev: hatlev5
                - level: if(age==GRADUATIONAGE_P, 
                         choice([1, 2, 3, 4, 5],
                         [P, LS, US, PS, T]),
                          9999) 
-#  "D:\data\Malta\MT_microsim\INPUT_DATA\lfs2016_MT.csv"
-#  tab hatlev5 if ageg==5
 #  Missings on hatlev5 (hat11lev) not included in the computation of the proportions
-
                - hatlev5: if(age<GRADUATIONAGE_P, 1, hatlev5)
                - hatlev5: if(age==GRADUATIONAGE_P, level, hatlev5)
                - hatlev3: if(hatlev5==1, 1, 
                              if(hatlev5==5, 3, 2))             
+
+                             
+#########################################################
+##  Module EDU, has two consequent processes. First, the process of assigning the highest level of education and second, the process of assigning field of education within 
+##  each of the educational levels. This is done by the “hatfield” process. Analogously, as in simulating educational levels, assignment to a field of education is also random, 
+##  keeping the proportions of fields within each of the educational levels based on the 30-34 age group. Fixed proportions are aligned by an exogenous table “field_level.csv”.
+##  Both, level as well as field of education are assigned at the age of 15.          
+#########################################################
+
              edufield():
                - hatfield: if(hatfield1==-1, 99, hatfield1)              
                - field: if(PRIMARY, 
@@ -172,18 +195,20 @@ entities:
                            choice([0,1,2,3,4,5,6,7,8,9,10], 
                            [TF0, TF1, TF2, TF3, TF4, TF5, TF6, TF7, TF8, TF9, TF10]), 
                            99)))))                   
-# #  tab hatfield1 if hatlev5==2 & ageg==5 & country_b==1, nolab
-# #  tab hatfield1 if hatlev5==3 & ageg==5 & country_b==1, nolab
-# #  tab hatfield1 if hatlev5==4 & ageg==5 & country_b==1, nolab
-# #  tab hatfield1 if hatlev5==5 & ageg==5 & country_b==1, nolab
-
   
                - hatfield: if(age==15, field, hatfield)    
                - hatfield: if(hatfield==-2, field, hatfield)
                - hatfield: if(hatfield==99, field, hatfield)               
-#               - hatfield: if(hatfield==99, 0, hatfield)
-#               - hatfield: if(hatlev5==1, 0, hatfield)
+
                
+####################################################################
+##  A sub-process “edu_init” is designed to run only in the initial period to finalize unfinished educational attainment of the age group of 15-30 years old individuals
+##  in the original source file. For those observations, where we have partial information on their educational attainment (such as for example when we know at the age of 20
+##  an individual has secondary education, but do not know whether he/she is going to upgrade to tertiary education because these shifts happen in higher age) we have 
+##  designed a complicated system of conditions to use this partial information, but at the same time consider the educational process as unfinished until the age of 30. 
+##  This process only runs in the initial period and presents a fixed part of the model, unlikely to change with future updates of the data or when implementing scenarios.  
+####################################################################               
+
              edulev_init(): 
                - primary_score: if(hatlev5==1, 1, 0)
                - ls_score: if(hatlev5==2, 1, 0)
@@ -336,13 +361,13 @@ simulation:
     
     input:
         path:   "INPUT_DATA"
-        file:   "lfs2017.h5"
+        file:   "lfs2018.h5"
 
     output:
         path:   "OUTPUT_DATA"
         file:   "simulation.h5"
         
-    start_period: 2012
+    start_period: 2019
     
-    periods: 8
+    periods: 2
     random_seed: 10000  

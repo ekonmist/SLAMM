@@ -2,6 +2,18 @@ import:
      - demo_LFS_01.yml
      - edu_LFS_01.yml
 
+####################################################################
+##  “EA” is an abbreviation for economic activity. In fact, this module distinguishes several types of economic statuses: 
+##  •	Economically active
+##  •	Students
+##  •	Retired
+##  •	Disabled 
+##  •	Other inactive 
+##  At the beginning of each period, economic status is set to unknown. If applicable, economic status from the previous period is used to model economic status in the current 
+##  period. Processes define specific situations when individuals change their status. The order of assigning the statuses plays a role, when age-related statuses are modelled 
+##  first, starting with students and the retired. 
+####################################################################     
+     
 # input global variables - demand by nace and qualifications 
 globals:
      periodic:
@@ -72,7 +84,6 @@ entities:
             - retired_early: {type: bool, initialdata: False}
             - student: {type: bool, initialdata: False}
             - disabled: {type: bool, initialdata: False}
-            - maternity: {type: bool, initialdata: False}
             - inactivity: {type: bool, initialdata: False}
             - inactivity_plus: {type: bool, initialdata: False}
             - toret: {type: int, initialdata: False}      
@@ -113,11 +124,6 @@ entities:
 
             ISMALE: sex == 1
             ISFEMALE: sex == 2            
-
-#            BA: region==1
-#            ZAPAD: region==2
-#            STRED: region==3
-#            VYCHOD: region==4
 
             AGEG17: age>=15 and age<=19
             AGEG22: age>=20 and age<=24
@@ -168,11 +174,28 @@ entities:
 
             
          processes: 
+####################################################################
+## In this section model reset value for attribute status. Before then model save this values as status one year before (status1y).
+####################################################################
             statusing(): 
                - status1y: status                             
-#               - status: status
                - status: -1
 
+####################################################################     
+##  As already mentioned in the previous section, for the sake of simplification all individuals are assigned a level and field of their highest education attained at the age
+##  of 15. Individuals older than 15 keep their field and level of education from previous periods. Individuals younger than 15 are assigned the elementary education with 0 code 
+##  for field at birth.
+##  In relation to this, additional simplifying assumptions are adopted. 
+##  A1: Each individual before reaching 15 years of age, is a student and therefore, economically inactive. 
+##  A2: No individual older than 26 is allowed to be a student.
+##  A3: Individuals between 15 and 25 years old are assessed to be students based on their level of education (acquired at the age of 15 ) and an educational level specific 
+##  graduation age. 
+##  Individuals not assigned as students move to a pool of the potentially economically active. This pool is subject to processes defined later in the model (retirement, 
+##  disability, other economic inactivity). If they do not fulfil the conditions for being assigned to one of the subsequent statuses, they are assigned as economically active.  
+##  Attribute student is defined by the process “study” based on the age of the individual. Age of student can only range from 0 to tertiary graduation age, which is defined 
+##  by the macro “GRADUATIONAGE_T”: 25. Attribute Student has values True/False. Value of this field is based on process EDULEV. Those possessing only secondary education 
+##  switch to student==False after they reach the graduation age from secondary educations (20).    
+####################################################################     
                
 #             EXITING LF PROCESSES                                 
             study(): 
@@ -197,72 +220,93 @@ entities:
                             if(age<=GRADUATIONAGE_T,
                             True, 
                             False), student)                                                 
-#               - status: if(status1y<>3), status, if(student, STUDENT, status))             
-               
                - status: if(student, STUDENT, status)             
 
+               
+####################################################################
+##  The process “retirement” evaluates individuals for retirement and assigns the attribute “retired”. It is done in two steps. In the first step, attribute “retired” is 
+##  assigned true, to individuals reaching the or already above the retirement age. Past and future retirement age is defined for each gender based on the valid legislation 
+##  in the exogenous table “globaltable.csv” separately for males and females and depends on number of children which females have during their lives. This is done by using 
+##  the following expectations of future shifts in the retirement age. Defining the retirement age in an exogenous table allows for defining scenarios of changes in the retirement
+##  age, which could bring simulations of labour supply changes with high relevance for policy making. 
+##  In the second step, working retired are picked up out of those who reached the retirement age. This is done by assigning the attribute “working_retired” based on a score 
+##  computed based on a probability model on the likelihood of being employed after reaching the retirement age. The logit model is estimated on LFS microdata and estimates 
+##  the probability based on, explanatory variables, such as gender, attained education and economic sector of employment in the previous year. The score is used to sort 
+##  individuals for further assignment into working retirement. Individuals are subsequently assigned into working retirement up to the level of working retired in their 
+##  particular age cohort. Age cohort is in this case defined in age relative to the actual retirement age. For this purpose the “toret” variable is created following the formula:
+##  toret = actual age in the period – retirement age valid in the period
+##  In the end, retired are those who reached the age of retirement and were not assigned to a special group of the working retired. 
+####################################################################
+               
             retirement():
                - retired: if(ISMALE and age_float>MALE_RA, True, retired)
-               - retired: if(ISFEMALE and age_float>FEMALE_RA_0 and pocet_deti==0, True, retired)
-               - retired: if(ISFEMALE and age_float>FEMALE_RA_1 and pocet_deti==1, True, retired)
-               - retired: if(ISFEMALE and age_float>FEMALE_RA_2 and pocet_deti==2, True, retired)
-               - retired: if(ISFEMALE and age_float>FEMALE_RA_3_4 and pocet_deti>=3 and pocet_deti<=4, True, retired)
-               - retired: if(ISFEMALE and age_float>FEMALE_RA_5 and pocet_deti>=5, True, retired)               
+               - retired: if(ISFEMALE and age_float>FEMALE_RA_0 and number_children==0, True, retired)
+               - retired: if(ISFEMALE and age_float>FEMALE_RA_1 and number_children==1, True, retired)
+               - retired: if(ISFEMALE and age_float>FEMALE_RA_2 and number_children==2, True, retired)
+               - retired: if(ISFEMALE and age_float>FEMALE_RA_3_4 and number_children>=3 and number_children<=4, True, retired)
+               - retired: if(ISFEMALE and age_float>FEMALE_RA_5 and number_children>=5, True, retired)               
                - toret: if(ISMALE,  trunc(age_float-MALE_RA), 
-                        if(pocet_deti==0, trunc(age_float-FEMALE_RA_0),
-                        if(pocet_deti==1, trunc(age_float-FEMALE_RA_1),
-                        if(pocet_deti==2, trunc(age_float-FEMALE_RA_2),
-                        if(pocet_deti>=3 and pocet_deti<=4, trunc(age_float-FEMALE_RA_3_4), trunc(age_float-FEMALE_RA_5))))))
-               
+                        if(number_children==0, trunc(age_float-FEMALE_RA_0),
+                        if(number_children==1, trunc(age_float-FEMALE_RA_1),
+                        if(number_children==2, trunc(age_float-FEMALE_RA_2),
+                        if(number_children>=3 and number_children<=4, trunc(age_float-FEMALE_RA_3_4), trunc(age_float-FEMALE_RA_5))))))
                
 #  logit early_ret ISFEMALE PRIMARY LOWER_SECONDARY  UPPER_SECONDARY POST_SECONDARY  L_AGRO L_INDUSTRY L_CONSTRUCTION L_MAR_SERVICES_1 L_MAR_SERVICES_2 L_PROF_AND_ADM_SERVICES L_NMAR_SERVICES L_OTHER
-               - retired_early_score: logit_score(ISFEMALE*(2.072878)+PRIMARY*(-0.7002994)+LOWER_SECONDARY*(0.6632286)+UPPER_SECONDARY*(0.5041857)+POST_SECONDARY*(0.0378838)+L_AGRO*(-0.4912505)+L_INDUSTRY*(-1.79426)+L_CONSTRUCTION*(-1.417654)+L_MAR_SERVICES_1*(-2.580714)+L_MAR_SERVICES_2*(-3.826446)+L_PROF_AND_ADM_SERVICES*(-3.411587)+L_NMAR_SERVICES*(-1.699302)+L_OTHER*(-1.938909)+1*(-5.579377))  
+               - retired_early_score: logit_score(ISFEMALE*(-1.365017)+PRIMARY*(-2.809093)+LOWER_SECONDARY*(-0.4567691)+UPPER_SECONDARY*(-0.0521172)+POST_SECONDARY*(1.020271)+L_AGRO*(-1.879888)+L_INDUSTRY*(-2.349919)+L_MAR_SERVICES_1*(-1.417244)+L_NMAR_SERVICES*(-0.9620676)+1*(-4.824622))  
                - retired_early: if(ISMALE, align(retired_early_score,'early_retired_male.csv', filter=toret<=0 and age>15),
                                            align(retired_early_score,'early_retired_female.csv', filter=toret<=0 and age>15))
                - status: if(retired, RETIRED, status)
-#               - status: if(retired_early, RETIRED, status)    
                - status: if(status1y==RETIRED, RETIRED, status)
 
 # logit ret_work ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY L_AGRO L_INDUSTRY L_ENERGY L_CONSTRUCTION L_MAR_SERVICES_1 L_MAR_SERVICES_2 L_PROF_AND_ADM_SERVICES L_NMAR_SERVICES L_OTHER
-               - working_retired_score: logit_score(ISFEMALE*(-0.8475698)+PRIMARY*(-2.138078)+LOWER_SECONDARY*(-0.8904242)+UPPER_SECONDARY*(-0.7684793)+POST_SECONDARY*(0.2766699)+L_AGRO*(1.390121)+L_INDUSTRY*(0.4612937)+L_ENERGY*(0.7377011)+L_CONSTRUCTION*(0.965102)+L_MAR_SERVICES_1*(0.1229672)+L_MAR_SERVICES_2*(-0.3177247)+L_PROF_AND_ADM_SERVICES*(1.417465)+L_NMAR_SERVICES*(1.002174)+L_OTHER*(1.527506)+1*(-3.648906))
+               - working_retired_score: logit_score(ISFEMALE*(-0.47708)+PRIMARY*(-3.238797)+LOWER_SECONDARY*(-1.10439)+UPPER_SECONDARY*(-0.8028202)+POST_SECONDARY*(0.1638092)+L_AGRO*(-0.1263998)+L_INDUSTRY*(-1.836338)+L_CONSTRUCTION*(-1.596105)+L_MAR_SERVICES_1*(-1.627642)+L_MAR_SERVICES_2*(-1.842654)+L_PROF_AND_ADM_SERVICES*(-1.257885)+L_NMAR_SERVICES*(-1.070376)+L_OTHER*(-0.3677448)+1*(-3.372205))
                - working_retired_score: if(status1y==1, working_retired_score+1, working_retired_score) 
                - working_retired: if(toret>=0 , 
                                   if(ISMALE, align(working_retired_score, 'working_retired_male.csv'), align(working_retired_score, 'working_retired_female.csv')), False)   
                - status: if(working_retired==True, -1, status)                                            
+
+####################################################################
+##  Disability is again defined based on the probability of being disabled which is a product of a probit estimation on EU-LFS 2018 microdata. Furthermore, the proportions 
+##  of disabled are aligned based on its real occurrence in 2018 EU-LFS distinguishing five-year age groups.
+##  The principle applied here, is thus similar to the one used in the case of early retirement. Alignment after sorting (based on the disability score) is applied. Alignment 
+##  proportions are counted on the total population and specifically per five-year age groups.
+##  Model assigns attribute "disabled" in the process "disability" based on age and other attributes. Age of disabled person can range from graduate age to retirement age. 
+##  Attribute “disabled” has values True/False. True is assigned based on the disability_score to the share of people (gender specific) in a particular age cohort defined in 
+##  the by alignment table (disability_male.csv and disability_female.csv). The score is calculated like logit regression of dummy variables. Disabled persons usually keep 
+##  their status from past periods what is assured by an arbitrary increase in the score for cases disabled in the previous periods (disabled_score=3). The alignment tables 
+##  was created from LFS 2018 and process "age1". 
+####################################################################
+
             disability():
 #  logit disability ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY L_AGRO L_INDUSTRY L_ENERGY L_CONSTRUCTION L_MAR_SERVICES_1 L_MAR_SERVICES_2 L_PROF_AND_ADM_SERVICES L_NMAR_SERVICES L_OTHER AGEG17 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57, iter(10)        
-               - disabled_score: logit_regr(ISFEMALE*(-0.6073501)+PRIMARY*(1.595294)+LOWER_SECONDARY*(1.516745)+UPPER_SECONDARY*(1.122193)+POST_SECONDARY*(1.147261)+L_AGRO*(-5.530918)+L_INDUSTRY*(-4.630152)+L_ENERGY*(-4.866968)+L_CONSTRUCTION*(-4.887245)+L_MAR_SERVICES_1*(-5.126169)+L_MAR_SERVICES_2*(-3.659546)+L_PROF_AND_ADM_SERVICES*(-3.884291)+L_NMAR_SERVICES*(-4.157779)+L_OTHER*(-5.352162)+AGEG17*(-0.7880609)+AGEG22*(0.7387431)+AGEG27*(2.380779)+AGEG32*(2.710976)+AGEG37*(3.296139)+AGEG42*(3.409024)+AGEG47*(3.953091)+AGEG52*(4.446279)+AGEG57*(4.180768)+1*(-6.198907)) 
+               - disabled_score: logit_regr(ISFEMALE*(-0.2564172)+PRIMARY*(1.958288)+LOWER_SECONDARY*(2.217666)+UPPER_SECONDARY*(1.605482)+POST_SECONDARY*(1.256825)+L_AGRO*(-4.068601)+L_INDUSTRY*(-5.808823)+L_ENERGY*(-4.352011)+L_CONSTRUCTION*(-4.626834)+L_MAR_SERVICES_1*(-5.334472)+L_MAR_SERVICES_2*(-5.450224)+L_PROF_AND_ADM_SERVICES*(-3.976731)+L_NMAR_SERVICES*(-4.48203)+AGEG17*(-1.502145)+AGEG22*(1.101198)+AGEG27*(1.82492)+AGEG32*(1.976818)+AGEG37*(2.535707)+AGEG42*(2.73659)+AGEG47*(3.159307)+AGEG52*(3.563133)+AGEG57*(3.970453)+1*(-5.935679)) 
                - disabled_score: if(status1y==5, 3, disabled_score)                  
                - disabled: if(status==-1 and toret<=0 and not immigrant_new, 
                               if(ISMALE,
                                  align(disabled_score, 'disability_male.csv'),
                                  align(disabled_score, 'disability_female.csv')),
                                  False) 
-#                                 align(disabled_score, 'disability_male.csv', leave=retired and student),
-#                                 align(disabled_score, 'disability_female.csv', leave=retired and student)),
-#               - disabled: if(True and ISMALE and age_float>MALE_RA, False, disabled)
-#               - disabled: if(status1y==3 and disabled, False, disabled)
-#   Table: disability_scr.csv                         
-#   table ageg if status!=3 & status!=4, c(mean disability)
                - status: if(disabled, DISABLED, status)                           
-            inactivity():          
-               - maternity: if(to_give_birth, 
-                                 True,
-                                 False)                 
-               - maternity: if(lag(to_give_birth), 
-                                 True,
-                                 False) 
-               
 
-#               - maternity: if(lag(maternity) and ( not lag(to_give_birth) or not lag(lag(to_give_birth)) or not lag(lag(lag(to_give_birth)))), False, maternity)
+####################################################################
+##  This category is supposed to cover all other forms of other economic inactivity. It is also in this group where we assume some behavioural change of inactive persons to 
+##  change in the average wage in the economy. This is done in the “inactivity_plus” attribute identifying originally inactive individuals additionally becoming economically 
+##  active because of the change in the average wage. 
+##  Model defines other forms of economic inactivity in the "inactivity" process. Age of inactive person can be only from graduate age to retirement age. Inactivity has values 
+##  True/False. 
+##  True is assigned based on inactivity_score to the share of people (gender specific) in a particular age cohort defined in the by alignment table (inactivity_LFS_male.csv 
+##  and inactivity_LFS_female.csv). 
+##  The score is calculated fitting a logit regression to LFS data using a set of dummy explanatory variables on a dummy variable referring to being inactive. Inactive persons 
+##  usually keep their status in next period. The alignment tables were created from LFS 2018 and process "age1".          
+##  Last part of the process simulate lower inactivity rate depending on average wage. If total average wage increase more than selected threshold (1.5 percent), inactivity rate
+##  will decrease at the magnitude defined by the elasticity of inactivity (defined in the "globaltable.csv").
+####################################################################
+
+            inactivity():          
 # logit IS_INACTIVE ISFEMALE PRIMARY LOWER_SECONDARY UPPER_SECONDARY POST_SECONDARY L_AGRO L_MINING L_INDUSTRY L_ENERGY L_CONSTRUCTION L_MAR_SERVICES_1 L_MAR_SERVICES_2 L_PROF_AND_ADM_SERVICES L_NMAR_SERVICES L_OTHER AGEG17 AGEG22 AGEG27 AGEG32 AGEG37 AGEG42 AGEG47 AGEG52 AGEG57 , iter(10)
-               - inactivity_score: logit_score(ISFEMALE*(1.814913)+PRIMARY*(0.4477194)+LOWER_SECONDARY*(0.3686484)+UPPER_SECONDARY*(0.3492937)+POST_SECONDARY*(-0.1233667)+L_AGRO*(-3.082172)+L_MINING*(-2.281815)+L_INDUSTRY*(-2.994911)+L_ENERGY*(-2.990666)+L_CONSTRUCTION*(-2.560622)+L_MAR_SERVICES_1*(-2.940291)+L_MAR_SERVICES_2*(-3.134852)+L_PROF_AND_ADM_SERVICES*(-2.436775)+L_NMAR_SERVICES*(-3.123976)+L_OTHER*(-2.897759)+AGEG17*(3.386279)+AGEG22*(5.211106)+AGEG27*(6.874551)+AGEG32*(7.237939)+AGEG37*(6.712798)+AGEG42*(6.13549)+AGEG47*(5.82061)+AGEG52*(5.683829)+AGEG57*(5.253636)+1*(-9.27789))
-#               - inactivity_score: if(ISFEMALE and age>40, if(WAS_INACTIVE, 3, inactivity_score),inactivity_score)
+               - inactivity_score: logit_score(ISFEMALE*(1.802204)+PRIMARY*(-0.0866449)+LOWER_SECONDARY*(-0.0809642)+UPPER_SECONDARY*(-0.128169)+POST_SECONDARY*(0.1333961)+L_AGRO*(-2.929464)+L_INDUSTRY*(-2.871214)+L_ENERGY*(-3.160013)+L_CONSTRUCTION*(-2.742811)+L_MAR_SERVICES_1*(-2.86748)+L_MAR_SERVICES_2*(-2.293128)+L_PROF_AND_ADM_SERVICES*(-2.872412)+L_NMAR_SERVICES*(-3.012263)+L_OTHER*(-3.60202)+AGEG17*(1.76219)+AGEG22*(3.016327)+AGEG27*(4.793566)+AGEG32*(5.467111)+AGEG37*(5.095967)+AGEG42*(4.557349)+AGEG47*(3.994431)+AGEG52*(3.8933)+AGEG57*(3.927538)+1*(-6.95059))
                - inactivity_score: if(ISMALE, if(status1y==6, inactivity_score+1, inactivity_score),inactivity_score)
                - inactivity_score: if(ISFEMALE, if(status1y==6, inactivity_score+1, inactivity_score),inactivity_score)
-# maternity in inactivity ?
-#               - inactivity_score: if(maternity, inactivity_score+3, inactivity_score)
-                             
                - inactivity: if(status==-1 and age>14 and toret<=0,
                                 if(ISMALE,
                                 align(inactivity_score, 'inactivity_LFS_male.csv', leave=retired and disabled and student),
@@ -270,22 +314,22 @@ entities:
                                 False)
 # useing elasticity of inactivity                                  
                - inactivity_plus: if(inactivity, if(W_avg/lag(W_avg)>1.015, align_abs(-inactivity_score, count(inactivity)*inac_elas),inactivity_plus),inactivity_plus)
-#               - inactivity: if(inactivity==True and sex==1 and age_float>MALE_RA, False, inactivity)
                - inactivity: if(status1y==3 and inactivity, False, inactivity)   
                - status: if(inactivity, INACTIVE, status)
                
-#             ENTERING LF PROCESSES
+####################################################################
+##  In each period, individuals are considered to be economically active, if they do not fulfil the conditions necessary to be assigned to one of the above-listed forms of 
+##  economic inactivity (study, retirement, disability, other inactivity). If an individual is not a student, retired, disabled or in another form of inactivity; he is assumed 
+##  to be economically active. Working retired are also economic active entity.
+##  Economic status is reconstructed anew in each period. For its reconstruction, information about the previous status is taken into account, where it is feasible. In simulating
+##  the economic status, we are trying to copy reality as much as possible to provide realistic information about the expected future development of the supply of labour in Slovakia. 
+####################################################################
+
             economic_activity():
                - ea: if(status==-1,
                         True,  
                         False)
-
-#               working retired:    
-                                          
                - ea: if(working_retired, True, ea)  
-
-#               - status: if(ea, EMPLOYED, status)               
-              
 
             csv_ea():
                - csv(period, groupby(status, period), fname='status_ea.csv', mode='a')
@@ -299,15 +343,15 @@ simulation:
         - person: [ageing, birth, death, immigration, edulev, edufield, statusing, study, retirement, inactivity, disability, economic_activity]
     input:
         path:   "INPUT_DATA"
-        file:   "lfs2017.h5"
+        
 
     output:
         path:   "OUTPUT_DATA"
         file:   "simulation.h5"
         
-    start_period: 2012
+    start_period: 2019
     
-    periods: 1
+    periods: 2
     
     random_seed: 10000        
      

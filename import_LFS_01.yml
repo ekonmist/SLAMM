@@ -1,16 +1,23 @@
+#########################################################
+##  Before the SLAMM_microsim model can be launched, source data need to be imported into a format employable in LIAM 2 (.h5). For this purpose we have created a script named 
+##  “import_LFS_01”. This script uploads the source file (lfs2018_SK_sample_20.csv in the folder INPUT_DATA) defining that the row of the source file is a going to be handled
+##  as an entity “person”, with particular fields (columns of the source database). Moreover, the output from MALM_HMALIO is going to be imported (“global_10_4_sample_pok_1.csv” 
+##  in the folder INPUT_DATA), with employment predictions. Both these initial data entries are stored in the file “lfs2018.h5” in the folder INPUT_DATA.
+##  The script designed to import the data needs to be opened in the editor available with the LIAM 2 software and executed  by pressing F5.
+#########################################################
 
-output: INPUT_DATA/lfs2017.h5
+
+output: INPUT_DATA/lfs2018.h5
 globals:
     periodic:
-        path: INPUT_DATA/global_10_4_vyber.csv
+        path: INPUT_DATA/global_10_4_sample_pok_1.csv
+#        path: INPUT_DATA/global_10_4.csv
         transposed: True
       
 entities:
     person:
-       path: INPUT_DATA\lfs2011_25sample.csv
+       path: INPUT_DATA\lfs2018_SK_sample_20.csv
        fields:
-            - hhnum: int
-            - hhseqnum: int
             - sex: int
             - qual3: int
             - qual4: int
@@ -20,8 +27,6 @@ entities:
             - hatfield1: int
             - status: int
             - status1y: int
-#            - nace_1d: int
-#            - nace_1y: int
             - nace10: int
             - nace: int
             - nace10_1y: int
@@ -29,5 +34,5 @@ entities:
             - hatlev3: int
             - hatlev5: int
             - country_b: int
-            - pocet_deti: int
+            - number_children: int
 
